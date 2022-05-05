@@ -1,0 +1,35 @@
+version: '3.9'
+
+networks:
+  my-tattoo-network:
+    driver: bridge
+
+services:
+  my-tattoo-database:
+    image: postgres
+    restart: always
+    networks:
+      - 'my-tattoo-network'
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - ./database/postgres:/database/postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+
+  my-tattoo-backend:
+    build: .
+    restart: always
+    networks:
+      - 'my-tattoo-network'
+    ports:
+      - ${PORT}:3001
+    volumes:
+      - ./src:/app/backend/src
+    links:
+      - my-tattoo-database
+    depends_on:
+      - my-tattoo-database
+    command: sh -c "yarn docker:afterUp"

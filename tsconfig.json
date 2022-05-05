@@ -1,0 +1,23 @@
+{
+  "include": ["./src/**/*"],
+  "references": [{ "path": "../common" }],
+  "compilerOptions": {
+    "target": "es2018",
+    "composite": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "module": "commonjs",
+    "skipLibCheck": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "esModuleInterop": true,
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"],
+      "@common/*": ["../../common/src/*"]
+    }
+  }
+}
