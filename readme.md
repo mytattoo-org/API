@@ -1,11 +1,7 @@
-# Backend Template
+# MyTattoo api
 
-- ## (SQL)
+- ## Postgres (SQL)
 
 - ## Express (Rest)
 
 - ## Node (Typescript)
-
-# How to run
-
-- ## docker-compose up
