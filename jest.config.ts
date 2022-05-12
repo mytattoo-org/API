@@ -14,7 +14,7 @@ const jestConfig: Config.InitialOptions = {
   setupFiles: ['dotenv/config'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text-summary', 'lcov'],
-  testPathIgnorePatterns: ['\\\\node_modules\\\\'],
+  testPathIgnorePatterns: ['node_modules'],
   coveragePathIgnorePatterns: ['node_modules', '.types.ts'],
   setupFilesAfterEnv: ['<rootDir>/src/config/jest.setup.ts'],
   collectCoverageFrom: ['<rootDir>/src/modules/**/useCases/**/*.ts'],

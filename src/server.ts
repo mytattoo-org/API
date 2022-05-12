@@ -1,8 +1,9 @@
 import 'reflect-metadata'
-import 'dotenv/config'
-import 'shared/containers'
 
-import { app } from './shared/routes'
+import '@shared/containers'
+import { app } from '@shared/routes'
+
+import 'dotenv/config'
 
 const port = process.env.PORT
 

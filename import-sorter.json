@@ -11,7 +11,7 @@
     "customOrderingRules": {
       "rules": [
         {
-          "regex": "^./|^../",
+          "regex": "^./|^../|^reflect-metadata$",
           "orderLevel": 0,
           "disableSort": true
         },
