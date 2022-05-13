@@ -1,8 +1,8 @@
+import { Router } from 'express'
+
 import { CreateUserController } from '@modules/Users/useCases/createUser/CreateUserController'
 import { DeleteUserController } from '@modules/Users/useCases/deleteUser/DeleteUserController'
 import { ReadUsersController } from '@modules/Users/useCases/readUsers/ReadUsersController'
-
-import { Router } from 'express'
 
 const usersRoutes = Router()
 

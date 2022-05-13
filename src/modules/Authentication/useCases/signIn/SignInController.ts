@@ -1,8 +1,7 @@
-import { SignInService } from './SignInService'
-
 import { container } from 'tsyringe'
 
 import type { THandle } from './SignIn.types'
+import { SignInService } from './SignInService'
 
 class SignInController {
   handle: THandle = async (req, res) => {

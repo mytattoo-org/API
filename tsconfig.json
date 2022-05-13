@@ -1,5 +1,5 @@
 {
-  "include": ["./src/**/*"],
+  "include": ["./src/**/*", "./src/docs/swagger.yml"],
   "references": [{ "path": "../common" }],
   "compilerOptions": {
     "target": "es2018",
@@ -14,9 +14,11 @@
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
     "paths": {
-      "@modules/*": ["modules/*"],
+      "@docs/*": ["docs/*"],
+      "@types/*": ["types/*"],
       "@config/*": ["config/*"],
       "@shared/*": ["shared/*"],
+      "@modules/*": ["modules/*"],
       "@common/*": ["../../common/src/*"]
     }
   }

@@ -17,7 +17,7 @@ class SignInService {
   execute: TExecute = async ({ usernameOrEmail, password }) => {
     if (!usernameOrEmail || !password)
       throw new AppError(
-        'Needed to inform username or email, and password',
+        'Need to provide username or email, and password',
         400
       )
 
@@ -25,11 +25,11 @@ class SignInService {
       ? await this.usersRepository.findByEmail(usernameOrEmail)
       : await this.usersRepository.findByUsername(usernameOrEmail)
 
-    if (!foundUser) throw new AppError('Email or password invalid', 401)
+    if (!foundUser) throw new AppError('Invalid email or password', 401)
 
     const authorized = await bcrypt.compare(password, foundUser.password)
 
-    if (!authorized) throw new AppError('Email or password invalid', 401)
+    if (!authorized) throw new AppError('Invalid email or password', 401)
 
     const token = jwt.sign({}, process.env.JWT_SECRET, {
       subject: foundUser.id,

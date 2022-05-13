@@ -1,5 +1,6 @@
-import type { THandle } from './CreateUser.types'
 import { container } from 'tsyringe'
+
+import type { THandle } from './CreateUser.types'
 import { CreateUserService } from './CreateUserService'
 
 class CreateUserController {

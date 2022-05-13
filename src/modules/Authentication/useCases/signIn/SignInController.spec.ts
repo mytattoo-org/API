@@ -1,14 +1,14 @@
-import { app } from '@shared/routes'
-import { ISuperResponse } from '@shared/types/supertest'
-
-import { connectToDB } from '@config/connectToDB'
-
-import { TCreateUserResponse } from '@common/types/users/createUser.types'
-
 import { Client } from 'pg'
 import request from 'supertest'
 
+import { connectToDB } from '@config/connectToDB'
+
+import { app } from '@shared/routes'
+import { ISuperResponse } from '@shared/types/supertest'
+
 import type { TSignInResponse } from '@common/types/authentication/signIn.types'
+import { TCreateUserResponse } from '@common/types/users/createUser.types'
+
 let dbConnection: Client
 describe('SignInController', () => {
   beforeAll(async () => {

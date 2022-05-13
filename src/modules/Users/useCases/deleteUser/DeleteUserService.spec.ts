@@ -1,7 +1,7 @@
+import { DeleteUserService } from './DeleteUserService'
+
 import { UsersRepository } from '@modules/Users/repositories/User/UserRepository'
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
-
-import { DeleteUserService } from './DeleteUserService'
 
 let usersRepository: UsersRepository
 let deleteUserService: DeleteUserService

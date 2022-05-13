@@ -1,8 +1,7 @@
 import { UserModel } from '../../entities/UserModel'
+import type { IUsersRepository } from './IUserRepository.types'
 
 import { connectToDB } from '@config/connectToDB'
-
-import type { IUsersRepository } from './IUserRepository.types'
 
 class UsersRepository implements IUsersRepository {
   create: IUsersRepository['create'] = async ({

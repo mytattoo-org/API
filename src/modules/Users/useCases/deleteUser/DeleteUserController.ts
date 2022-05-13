@@ -1,4 +1,5 @@
 import { container } from 'tsyringe'
+
 import { THandle } from '../deleteUser/DeleteUser.types'
 import { DeleteUserService } from './DeleteUserService'
 

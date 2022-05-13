@@ -1,5 +1,5 @@
-import { TExecute } from './ThrowAppError.types'
 import { AppError } from '../../entities/AppError'
+import { TExecute } from './ThrowAppError.types'
 
 class ThrowAppErrorService {
   execute: TExecute = error => {

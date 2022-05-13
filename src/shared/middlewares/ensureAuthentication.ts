@@ -1,8 +1,7 @@
-import { AppError } from '@modules/Error/entities/AppError'
-
+import type { RequestHandler } from 'express'
 import jwt from 'jsonwebtoken'
 
-import type { RequestHandler } from 'express'
+import { AppError } from '@modules/Error/entities/AppError'
 
 const ensureAuthentication: RequestHandler<any> = async (req, res, next) => {
   const token = req.headers.authorization.split(' ')[1]

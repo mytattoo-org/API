@@ -1,16 +1,13 @@
-import { app } from '@shared/routes'
-import { ISuperResponse } from '@shared/types/supertest'
+import { Client } from 'pg'
+import request from 'supertest'
 
 import { connectToDB } from '@config/connectToDB'
 
-import {
-  IReadUsersRequestParams,
-  TReadUsersResponse
-} from '@common/types/users/readUsers.types'
-import { TCreateUserResponse } from '@common/types/users/createUser.types'
+import { app } from '@shared/routes'
+import { ISuperResponse } from '@shared/types/supertest'
 
-import { Client } from 'pg'
-import request from 'supertest'
+import { TCreateUserResponse } from '@common/types/users/createUser.types'
+import { TReadUsersResponse } from '@common/types/users/readUsers.types'
 
 let dbConnection: Client
 

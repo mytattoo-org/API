@@ -1,8 +1,9 @@
+import { RequestHandler } from 'express'
+
 import type {
   ICreateUserRequest,
   TCreateUserResponse
 } from '@common/types/users/createUser.types'
-import { RequestHandler } from 'express'
 
 type THandle = RequestHandler<void, TCreateUserResponse, ICreateUserRequest>
 

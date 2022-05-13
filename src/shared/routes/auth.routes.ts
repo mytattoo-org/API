@@ -1,6 +1,6 @@
-import { SignInController } from '@modules/Authentication/useCases/signIn/SignInController'
-
 import { Router } from 'express'
+
+import { SignInController } from '@modules/Authentication/useCases/signIn/SignInController'
 
 const authRoutes = Router()
 

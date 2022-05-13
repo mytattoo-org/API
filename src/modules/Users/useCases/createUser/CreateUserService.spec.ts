@@ -1,10 +1,11 @@
-import { AppError } from '@modules/Error/entities/AppError'
-import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
-import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
-
 import { CreateUserService } from '../createUser/CreateUserService'
 
+import { AppError } from '@modules/Error/entities/AppError'
+import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
+import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
+
 import type { ICreateUserRequest } from '@common/types/users/createUser.types'
+
 let usersRepository: IUsersRepository
 let createUserService: CreateUserService
 

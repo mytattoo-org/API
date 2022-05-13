@@ -1,0 +1,231 @@
+openapi: '3.0.0'
+
+info:
+  title: 'MyTattoo'
+  description: 'API BFF for MyTattoo'
+  contact:
+    email: 'miguelandradebarreto2@gmail.com'
+  version: '1.0.0'
+
+servers:
+  - url: http://localhost:3001
+    description: 'Localhost for tests and dev'
+  - url: http://18.228.119.214:3001
+    description: 'A amazon EC2 production build'
+
+paths:
+  /auth/sign-in:
+    post:
+      tags: ['Auth']
+      description: Route to sign in
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - usernameOrEmail
+                - password
+              properties:
+                usernameOrEmail:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: Successfully authenticated
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - token
+                properties:
+                  id:
+                    type: string
+                  token:
+                    type: string
+        400:
+          description: 'Need to provide username or email, and password'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+        401:
+          description: 'Invalid email or password'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+
+  /users/{userId}:
+    get:
+      summary: Read user
+      description: Find specific user using id param
+      tags: ['Users']
+      parameters:
+        - in: path
+          required: true
+          name: userId
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successfully return all users
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - user
+                properties:
+                  user:
+                    type: object
+                    $ref: '#components/schemas/user'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+
+    delete:
+      summary: Delete user
+      description: Delete specific user using id param
+      tags: ['Users']
+      parameters:
+        - in: path
+          required: true
+          name: userId
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successfully delete user
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - deletedUser
+                properties:
+                  deletedUser:
+                    $ref: '#components/schemas/user'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+
+  /users:
+    get:
+      summary: Read users
+      description: Get all users
+      tags: ['Users']
+      responses:
+        200:
+          description: Successfully return all users
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - users
+                properties:
+                  users:
+                    type: array
+                    items:
+                      type: object
+                      $ref: '#components/schemas/user'
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+
+    post:
+      summary: Create user
+      description: Route to sign up and create user
+      tags: ['Users']
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - username
+                - password
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        201:
+          description: User created
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - createdUser
+                properties:
+                  createdUser:
+                    $ref: '#components/schemas/user'
+        400:
+          description: |
+            * E-mail already exists
+            * Username already exists
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+
+        500:
+          description: Unexpected error
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/error'
+
+components:
+  schemas:
+    error:
+      type: object
+      properties:
+        error:
+          type: string
+
+    user:
+      type: object
+      required:
+        - id
+        - email
+        - username
+        - created_at
+        - updated_at
+      properties:
+        id:
+          type: string
+        bio:
+          type: string
+        email:
+          type: string
+        avatar:
+          type: string
+        username:
+          type: string
+        full_name:
+          type: string
+        short_bio:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string

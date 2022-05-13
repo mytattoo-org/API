@@ -1,10 +1,10 @@
-import { app } from '@shared/routes'
-import { ISuperResponse } from '@shared/types/supertest'
+import { Client } from 'pg'
+import request from 'supertest'
 
 import { connectToDB } from '@config/connectToDB'
 
-import { Client } from 'pg'
-import request from 'supertest'
+import { app } from '@shared/routes'
+import { ISuperResponse } from '@shared/types/supertest'
 
 import type {
   ICreateUserRequest,

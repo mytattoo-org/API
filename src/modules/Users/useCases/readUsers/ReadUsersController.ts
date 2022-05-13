@@ -1,5 +1,6 @@
-import type { THandle } from './ReadUsers.types'
 import { container } from 'tsyringe'
+
+import type { THandle } from './ReadUsers.types'
 import { ReadUsersService } from './ReadUsersService'
 
 class ReadUsersController {

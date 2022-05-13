@@ -1,9 +1,9 @@
+import { RequestHandler } from 'express'
+
 import {
   IReadUsersRequestParams,
   TReadUsersResponse
 } from '@common/types/users/readUsers.types'
-
-import { RequestHandler } from 'express'
 
 type TExecute = (
   id?: IReadUsersRequestParams['id']

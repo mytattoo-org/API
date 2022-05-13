@@ -1,9 +1,9 @@
 import { SignInService } from './SignInService'
 
+import { AppError } from '@modules/Error/entities/AppError'
 import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
 import { CreateUserService } from '@modules/Users/useCases/createUser/CreateUserService'
-import { AppError } from '@modules/Error/entities/AppError'
 
 let signInService: SignInService
 let usersRepository: IUsersRepository

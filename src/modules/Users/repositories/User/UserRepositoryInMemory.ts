@@ -1,5 +1,5 @@
-import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 import { UserModel } from '@modules/Users/entities/UserModel'
+import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
 class UsersRepositoryInMemory implements IUsersRepository {
   private users: UserModel[] = []

@@ -10,10 +10,11 @@
         "cwd": "babelrc",
         "alias": {
           "@docs": ["./src/docs"],
+          "@types": ["./src/types"],
           "@config": ["./src/config"],
           "@shared": ["./src/shared"],
-          "@modules": ["./src/modules"],
-          "@common": ["../common/src"]
+          "@common": ["../common/src"],
+          "@modules": ["./src/modules"]
         }
       }
     ],

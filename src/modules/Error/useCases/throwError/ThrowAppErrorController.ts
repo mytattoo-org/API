@@ -1,5 +1,5 @@
-import { ThrowAppErrorService } from './ThrowAppErrorService'
 import { THandle } from './ThrowAppError.types'
+import { ThrowAppErrorService } from './ThrowAppErrorService'
 
 class ThrowAppErrorController {
   handle: THandle = (error, _req, res, _next) => {
