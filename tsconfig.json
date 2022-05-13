@@ -19,7 +19,7 @@
       "@config/*": ["config/*"],
       "@shared/*": ["shared/*"],
       "@modules/*": ["modules/*"],
-      "@common/*": ["../../common/src/*"]
+      "@common/*": ["../submodules/common/src/*"]
     }
   }
 }
