@@ -2,7 +2,6 @@ name: CD
 
 on:
   push:
-  pull_request:
     branches:
       - master
 
@@ -13,11 +12,17 @@ jobs:
     steps:
       - name: Checkout the files
         uses: actions/checkout@v2
-
-      - name: Deploy to AWS
-        uses: easingthemes/ssh-deploy@main
         env:
-          TARGET: ${{ secrets.TARGET_DIR }}
-          REMOTE_HOST: ${{ secrets.HOST_DNS }}
-          REMOTE_USER: ${{ secrets.USERNAME }}
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+          HOSTNAME: ${{ secrets.HOST_DNS }}
+          USER_NAME: ${{ secrets.USERNAME }}
+          PRIVATE_KEY: ${{ secrets.EC2_SSH_KEY }}
+
+        run: |
+          echo "$PRIVATE_KEY" > private_key && chmod 600 private_key
+          ssh -o StrictHostKeyChecking=no -i private_key ${USER_NAME}@${HOSTNAME} '
+
+            cd /api &&
+            git checkout master &&
+            git pull origin master &&
+            docker-compose up -d
+          '
