@@ -6,7 +6,7 @@ import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRe
 let usersRepository: UsersRepository
 let deleteUserService: DeleteUserService
 
-describe('DeleteUserService', () => {
+describe.skip('DeleteUserService', () => {
   beforeEach(() => {
     usersRepository = new UsersRepositoryInMemory()
     deleteUserService = new DeleteUserService(usersRepository)

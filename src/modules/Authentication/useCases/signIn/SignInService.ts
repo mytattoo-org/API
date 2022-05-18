@@ -31,7 +31,7 @@ class SignInService {
 
     if (!authorized) throw new AppError('Invalid email or password', 401)
 
-    const token = jwt.sign({}, process.env.JWT_SECRET, {
+    const token = jwt.sign({}, process.env.API_JWT_SECRET, {
       subject: foundUser.id,
       expiresIn: '1d'
     })

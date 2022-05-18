@@ -8,7 +8,7 @@ let usersRepository: IUsersRepository
 let readUsersService: ReadUsersService
 let createUserService: CreateUserService
 
-describe.only('ReadUsersService', () => {
+describe.skip('ReadUsersService', () => {
   beforeEach(() => {
     usersRepository = new UsersRepositoryInMemory()
     readUsersService = new ReadUsersService(usersRepository)

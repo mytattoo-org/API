@@ -1,8 +1,7 @@
-import { compilerOptions } from './tsconfig.json'
-
+import type { Config } from '@jest/types'
 import { pathsToModuleNameMapper } from 'ts-jest'
 
-import type { Config } from '@jest/types'
+import { compilerOptions } from './tsconfig.json'
 
 const jestConfig: Config.InitialOptions = {
   bail: true,
@@ -10,7 +9,7 @@ const jestConfig: Config.InitialOptions = {
   preset: 'ts-jest',
   collectCoverage: true,
   coverageProvider: 'v8',
-  testMatch: ['**/*.spec.ts'],
+  testRegex: ['src/.*\\.spec\\.ts$'],
   setupFiles: ['dotenv/config'],
   coverageDirectory: 'coverage',
   coverageReporters: ['text-summary', 'lcov'],

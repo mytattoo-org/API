@@ -1,7 +1,7 @@
 import { Client } from 'pg'
 import request from 'supertest'
 
-import { connectToDB } from '@config/connectToDB'
+import { connectToTestsDB } from '@config/connectToDB'
 
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
@@ -20,9 +20,9 @@ const createUserData: ICreateUserRequest = {
   email: 'instintos@instintos.com'
 }
 
-describe('CreateUserController', () => {
+describe.skip('CreateUserController', () => {
   beforeAll(async () => {
-    dbConnection = await connectToDB()
+    dbConnection = await connectToTestsDB()
   })
 
   afterAll(async () => {

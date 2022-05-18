@@ -1,7 +1,7 @@
 import { Client } from 'pg'
 import request from 'supertest'
 
-import { connectToDB } from '@config/connectToDB'
+import { connectToTestsDB } from '@config/connectToDB'
 
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
@@ -11,9 +11,9 @@ import { TReadUsersResponse } from '@common/types/users/readUsers.types'
 
 let dbConnection: Client
 
-describe('ReadUserController', () => {
+describe.skip('ReadUserController', () => {
   beforeAll(async () => {
-    dbConnection = await connectToDB()
+    dbConnection = await connectToTestsDB()
   })
 
   afterAll(async () => {

@@ -4,15 +4,16 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --poll --respawn -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules dist/server.js",
-    "dev": "ts-node-dev --poll --respawn -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "docker:cd": "yarn migrate; yarn build; yarn start",
+    "test": "jest --runInBand --forceExit --no-experimental-fetch",
+    "docker:test": "dotenv -- cross-var \"docker exec %API_CONTAINER% yarn test --coverage=false\"",
+    "docker:ci": "yarn install; yarn migrate:test; yarn dev",
     "build": "babel src --extensions \".ts,.js\" --out-dir dist --copy-files ",
-    "test": "clear && jest --runInBand --forceExit",
-    "upgrade-all": "yarn yarn-upgrade-all",
-    "migrate": "dotenv -- cross-var \"pg-migrations apply -D ./src/shared/migrations/ -c %DB_URL%\"",
-    "docker:afterUp": "yarn migrate; yarn build; yarn start",
     "docker:prune": "docker-compose down && docker system prune -a -f --volumes",
-    "docker:restart": "docker-compose down && docker-compose up -d && yarn migrate"
+    "migrate": "dotenv -- cross-var \"pg-migrations apply -D ./src/shared/migrations/ -c %DB_URL%\"",
+    "migrate:test": "dotenv -- cross-var \"pg-migrations apply -D ./src/shared/migrations/ -c %DB_TEST_URL%\"",
+    "dev": "ts-node-dev --poll --respawn -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules src/server.ts",
+    "start": "ts-node-dev --poll --respawn -r tsconfig-paths/register --inspect --transpile-only --ignore-watch node_modules dist/server.js"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -39,6 +40,7 @@
     "@typescript-eslint/parser": "^5.12.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
+    "babel-preset-env": "^1.7.0",
     "class-validator": "^0.13.2",
     "eslint": "^8.9.0",
     "jest": "27.0.0",
