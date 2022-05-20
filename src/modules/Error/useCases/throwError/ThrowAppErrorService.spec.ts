@@ -4,7 +4,7 @@ import { AppError } from '@modules/Error/entities/AppError'
 
 let throwAppErrorService: ThrowAppErrorService
 
-describe.skip('ThrowAppErrorService', () => {
+describe('ThrowAppErrorService', () => {
   beforeEach(() => {
     throwAppErrorService = new ThrowAppErrorService()
   })

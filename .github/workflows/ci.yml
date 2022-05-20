@@ -6,8 +6,17 @@ on:
     branches:
       - dev
 
+env:
+  DOCKER_AFTER_UP: yarn ci
+  DB_PORT: ${{ secrets.DB_PORT}}
+  DB_NAME: ${{ secrets.DB_NAME}}
+  DB_USER: ${{ secrets.DB_USER}}
+  API_PORT: ${{ secrets.API_PORT}}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD}}
+  API_JWT_SECRET: ${{ secrets.API_JWT_SECRET}}
+
 jobs:
-  tests:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
@@ -18,11 +27,8 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
-      - name: Install
-        run: yarn
-
       - name: Docker-compose up
         run: docker-compose up -d
 
-      - name: Run tests inside docker container
+      - name: Run tests
         run: yarn docker:test

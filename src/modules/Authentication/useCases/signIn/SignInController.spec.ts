@@ -6,7 +6,7 @@ import { ISuperResponse } from '@shared/types/supertest'
 import type { TSignInResponse } from '@common/types/authentication/signIn.types'
 import { TCreateUserResponse } from '@common/types/users/createUser.types'
 
-describe.skip('SignInController', () => {
+describe('SignInController', () => {
   it('should be able to be authenticated', async () => {
     const createUserData = {
       username: 'InSTinToS',

@@ -6,7 +6,7 @@ import { ISuperResponse } from '@shared/types/supertest'
 import { TCreateUserResponse } from '@common/types/users/createUser.types'
 import { TReadUsersResponse } from '@common/types/users/readUsers.types'
 
-describe.skip('ReadUserController', () => {
+describe('ReadUserController', () => {
   it('should be able to read a user using id', async () => {
     const createdUserResponse: ISuperResponse<TCreateUserResponse> =
       await request(app).post('/users').send({

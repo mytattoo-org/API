@@ -16,7 +16,7 @@ const createUserData: ICreateUserRequest = {
   email: 'instintos@instintos.com'
 }
 
-describe.skip('CreateUserController', () => {
+describe('CreateUserController', () => {
   beforeEach(async () => {
     response = await request(app).post('/users').send(createUserData)
   })
@@ -31,36 +31,32 @@ describe.skip('CreateUserController', () => {
     expect(response.body.createdUser.username).toBe(createUserData.username)
   })
 
-  // it('should not be able to create a user if email already exists', async () => {
-  //   const createSecondUserData: ICreateUserRequest = {
-  //     username: 'InSTinToS2',
-  //     password: 'Miguel@1234',
-  //     email: 'instintos@instintos.com'
-  //   }
+  it('should not be able to create a user if email already exists', async () => {
+    const createSecondUserData: ICreateUserRequest = {
+      username: 'InSTinToS2',
+      password: 'Miguel@1234',
+      email: 'instintos@instintos.com'
+    }
 
-  //   expect(async () => {
-  //     await request(app).post('/users').send(createSecondUserData)
-  //   }).rejects.tobeins
+    const responseCreateSecondUser: ISuperResponse<TCreateUserResponse> =
+      await request(app).post('/users').send(createSecondUserData)
 
-  //   // const responseCreateSecondUser: ISuperResponse<TCreateUserResponse> =
-  //   //   await request(app).post('/users').send(createSecondUserData)
+    expect(responseCreateSecondUser.statusCode).toBe(400)
+    expect(responseCreateSecondUser.body.error).toBe('E-mail already exists')
+  })
 
-  //   // expect(responseCreateSecondUser.statusCode).toBe(400)
-  //   // expect(responseCreateSecondUser.body.error).toBe('E-mail already exists')
-  // })
+  it('should not be able to create a user if username already exists', async () => {
+    const createSecondUserData: ICreateUserRequest = {
+      username: 'InSTinToS',
+      password: 'Miguel@1234',
+      email: 'instintos2@instintos.com'
+    }
 
-  // it('should not be able to create a user if username already exists', async () => {
-  //   const createSecondUserData: ICreateUserRequest = {
-  //     username: 'InSTinToS',
-  //     password: 'Miguel@1234',
-  //     email: 'instintos2@instintos.com'
-  //   }
+    const response: ISuperResponse<TCreateUserResponse> = await request(app)
+      .post('/users')
+      .send(createSecondUserData)
 
-  //   const response: ISuperResponse<TCreateUserResponse> = await request(app)
-  //     .post('/users')
-  //     .send(createSecondUserData)
-
-  //   expect(response.statusCode).toBe(400)
-  //   expect(response.body.error).toBe('Username already exists')
-  // })
+    expect(response.statusCode).toBe(400)
+    expect(response.body.error).toBe('Username already exists')
+  })
 })

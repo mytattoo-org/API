@@ -9,7 +9,7 @@ let signInService: SignInService
 let usersRepository: IUsersRepository
 let createUserService: CreateUserService
 
-describe.skip('SignInService', () => {
+describe('SignInService', () => {
   beforeEach(() => {
     usersRepository = new UsersRepositoryInMemory()
     signInService = new SignInService(usersRepository)

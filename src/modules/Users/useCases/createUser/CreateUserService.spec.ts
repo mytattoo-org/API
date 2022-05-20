@@ -9,7 +9,7 @@ import type { ICreateUserRequest } from '@common/types/users/createUser.types'
 let usersRepository: IUsersRepository
 let createUserService: CreateUserService
 
-describe.skip('CreateUserService', () => {
+describe('CreateUserService', () => {
   beforeEach(() => {
     usersRepository = new UsersRepositoryInMemory()
     createUserService = new CreateUserService(usersRepository)
