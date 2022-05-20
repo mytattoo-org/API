@@ -1,5 +1,9 @@
 {
-  "include": ["./src/**/*", "./src/docs/swagger.yml"],
+  "include": [
+    "./src/**/*",
+    "./src/docs/swagger.yml",
+    "./submodules/common/**/*"
+  ],
   "references": [{ "path": "../common" }],
   "compilerOptions": {
     "target": "es2018",

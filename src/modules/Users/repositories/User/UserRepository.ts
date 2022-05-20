@@ -1,7 +1,7 @@
 import { UserModel } from '../../entities/UserModel'
 import type { IUsersRepository } from './IUserRepository.types'
 
-import { connectToDB } from '@config/connectToDB'
+import { query } from '@shared/database'
 
 class UsersRepository implements IUsersRepository {
   create: IUsersRepository['create'] = async ({
@@ -12,9 +12,7 @@ class UsersRepository implements IUsersRepository {
     updated_at,
     username
   }) => {
-    const database = await connectToDB()
-
-    const query = `
+    const queryData = `
       INSERT INTO users (
         id,
         email,
@@ -32,7 +30,7 @@ class UsersRepository implements IUsersRepository {
       );
     `
 
-    await database.query<UserModel>(query)
+    await query<UserModel>(queryData)
 
     const createdUser = await this.findById(id)
 
@@ -40,49 +38,39 @@ class UsersRepository implements IUsersRepository {
   }
 
   delete: IUsersRepository['delete'] = async id => {
-    const database = await connectToDB()
+    const queryData = `DELETE FROM Users WHERE id='${id}'`
 
-    const query = `DELETE FROM Users WHERE id='${id}'`
-
-    await database.query(query)
+    await query(queryData)
   }
 
   findAll: IUsersRepository['findAll'] = async () => {
-    const database = await connectToDB()
+    const queryData = 'SELECT * FROM Users'
 
-    const query = 'SELECT * FROM Users'
-
-    const allUsers = (await database.query<UserModel>(query)).rows
+    const allUsers = (await query<UserModel>(queryData)).rows
 
     return allUsers
   }
 
   findById: IUsersRepository['findById'] = async id => {
-    const database = await connectToDB()
+    const queryData = `SELECT * FROM Users WHERE id='${id}'`
 
-    const query = `SELECT * FROM Users WHERE id='${id}'`
-
-    const foundUser = (await database.query<UserModel>(query)).rows[0]
+    const foundUser = (await query<UserModel>(queryData)).rows[0]
 
     return foundUser
   }
 
   findByEmail: IUsersRepository['findByEmail'] = async email => {
-    const database = await connectToDB()
+    const queryData = `SELECT * FROM Users WHERE email='${email}'`
 
-    const query = `SELECT * FROM Users WHERE email='${email}'`
-
-    const foundUser = (await database.query<UserModel>(query)).rows[0]
+    const foundUser = (await query<UserModel>(queryData)).rows[0]
 
     return foundUser
   }
 
   findByUsername: IUsersRepository['findByUsername'] = async username => {
-    const database = await connectToDB()
+    const queryData = `SELECT * FROM Users WHERE username='${username}'`
 
-    const query = `SELECT * FROM Users WHERE username='${username}'`
-
-    const foundUser = (await database.query<UserModel>(query)).rows[0]
+    const foundUser = (await query<UserModel>(queryData)).rows[0]
 
     return foundUser
   }

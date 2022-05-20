@@ -4,11 +4,11 @@ import { pathsToModuleNameMapper } from 'ts-jest'
 import { compilerOptions } from './tsconfig.json'
 
 const jestConfig: Config.InitialOptions = {
-  bail: true,
   clearMocks: true,
   preset: 'ts-jest',
   collectCoverage: true,
   coverageProvider: 'v8',
+  testEnvironment: 'node',
   testRegex: ['src/.*\\.spec\\.ts$'],
   setupFiles: ['dotenv/config'],
   coverageDirectory: 'coverage',

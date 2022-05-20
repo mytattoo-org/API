@@ -1,7 +1,4 @@
-import { Client } from 'pg'
 import request from 'supertest'
-
-import { connectToTestsDB } from '@config/connectToDB'
 
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
@@ -9,16 +6,7 @@ import { ISuperResponse } from '@shared/types/supertest'
 import type { TSignInResponse } from '@common/types/authentication/signIn.types'
 import { TCreateUserResponse } from '@common/types/users/createUser.types'
 
-let dbConnection: Client
 describe.skip('SignInController', () => {
-  beforeAll(async () => {
-    dbConnection = await connectToTestsDB()
-  })
-
-  afterAll(async () => {
-    await dbConnection.end()
-  })
-
   it('should be able to be authenticated', async () => {
     const createUserData = {
       username: 'InSTinToS',

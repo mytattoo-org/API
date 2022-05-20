@@ -1,6 +1,6 @@
-import { Client } from 'pg'
+import { Client, Pool } from 'pg'
 
-const connectToTestsDB = async () => {
+const createTestsDB = () => {
   const database = new Client({
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
@@ -9,12 +9,10 @@ const connectToTestsDB = async () => {
     port: Number(process.env.DB_TEST_PORT)
   })
 
-  await database.connect()
-
   return database
 }
 
-const connectToProdDB = async () => {
+const createProductionDB = () => {
   const database = new Client({
     user: process.env.DB_USER,
     database: process.env.DB_NAME,
@@ -23,12 +21,22 @@ const connectToProdDB = async () => {
     port: Number(process.env.DB_PORT)
   })
 
-  await database.connect()
+  return database
+}
+
+const createDatabase = () => {
+  let database: Client
+
+  if (process.env.IS_TESTING === 'true') database = createTestsDB()
+  else database = createProductionDB()
 
   return database
 }
 
-const connectToDB =
-  process.env.IS_TESTING === 'true' ? connectToTestsDB : connectToProdDB
+const pool = new Pool(createDatabase())
 
-export { connectToDB, connectToTestsDB }
+const query = async <T>(text) => {
+  return pool.query<T>(text)
+}
+
+export { query, pool }

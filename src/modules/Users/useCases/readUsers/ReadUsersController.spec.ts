@@ -1,7 +1,4 @@
-import { Client } from 'pg'
 import request from 'supertest'
-
-import { connectToTestsDB } from '@config/connectToDB'
 
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
@@ -9,17 +6,7 @@ import { ISuperResponse } from '@shared/types/supertest'
 import { TCreateUserResponse } from '@common/types/users/createUser.types'
 import { TReadUsersResponse } from '@common/types/users/readUsers.types'
 
-let dbConnection: Client
-
 describe.skip('ReadUserController', () => {
-  beforeAll(async () => {
-    dbConnection = await connectToTestsDB()
-  })
-
-  afterAll(async () => {
-    await dbConnection.end()
-  })
-
   it('should be able to read a user using id', async () => {
     const createdUserResponse: ISuperResponse<TCreateUserResponse> =
       await request(app).post('/users').send({

@@ -12,15 +12,15 @@ import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRep
 class CreateUserService {
   constructor(
     @inject('UsersRepository')
-    private UsersRepository: IUsersRepository
+    private usersRepository: IUsersRepository
   ) {}
 
   execute: TExecute = async data => {
-    const foundUserByEmail = await this.UsersRepository.findByEmail(data.email)
+    const foundUserByEmail = await this.usersRepository.findByEmail(data.email)
 
     if (foundUserByEmail) throw new AppError('E-mail already exists', 400)
 
-    const foundUserByUsername = await this.UsersRepository.findByUsername(
+    const foundUserByUsername = await this.usersRepository.findByUsername(
       data.username
     )
 
@@ -32,7 +32,7 @@ class CreateUserService {
 
     newUser.password = bcrypt.hashSync(data.password, 10)
 
-    const createdUser = await this.UsersRepository.create(newUser)
+    const createdUser = await this.usersRepository.create(newUser)
 
     return { createdUser: { ...createdUser, password: undefined } }
   }

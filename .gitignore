@@ -5,4 +5,4 @@ yarn-error.log
 .vscode
 coverage
 yarn.lock
-database
+/database

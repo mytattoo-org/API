@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "docker:cd": "yarn migrate; yarn build; yarn start",
-    "test": "jest --runInBand --forceExit --no-experimental-fetch",
+    "test": "jest --runInBand --forceExit",
     "docker:test": "dotenv -- cross-var \"docker exec %API_CONTAINER% yarn test --coverage=false\"",
     "docker:ci": "yarn install; yarn migrate:test; yarn dev",
     "build": "babel src --extensions \".ts,.js\" --out-dir dist --copy-files ",
@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
-    "@babel/core": "^7.17.7",
+    "@babel/core": "^7.18.0",
     "@babel/node": "^7.16.8",
     "@babel/plugin-proposal-class-properties": "^7.16.7",
     "@babel/plugin-proposal-decorators": "^7.17.2",
@@ -38,6 +38,7 @@
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
+    "babel-jest": "^28.1.0",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "babel-preset-env": "^1.7.0",

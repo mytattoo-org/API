@@ -15,17 +15,14 @@ class ReadUsersService {
     if (id) {
       const user = await this.usersRepository.findById(id)
 
-      delete user.password
-
-      return { user }
+      return { user: {...user, password: undefined  } }
     }
 
     const users = await this.usersRepository.findAll()
 
     const usersWithoutPassword = users.map(user => {
-      delete user.password
 
-      return user
+      return {...user, password: undefined}
     })
 
     return { users: usersWithoutPassword }
