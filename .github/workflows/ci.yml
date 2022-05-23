@@ -27,6 +27,9 @@ jobs:
           fetch-depth: 0
           submodules: recursive
 
+      - name: Install
+        run: yarn
+
       - name: Docker-compose up
         run: docker-compose up -d
 
