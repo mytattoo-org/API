@@ -30,6 +30,16 @@ jobs:
       - name: Install
         run: yarn
 
+      - run: |
+          touch .env
+          echo DB_PORT ="$DB_PORT" >> .env
+          echo DB_NAME ="$DB_NAME" >> .env
+          echo DB_USER ="$DB_USER" >> .env
+          echo DB_PASSWORD ="$DB_PASSWORD" >> .env
+          echo API_PORT ="$API_PORT" >> .env
+          echo API_JWT_SECRET ="$API_JWT_SECRET" >> .env
+          echo DOCKER_AFTER_UP ="$DOCKER_AFTER_UP" >> .env
+
       - name: Docker-compose up
         run: docker-compose up -d
 
