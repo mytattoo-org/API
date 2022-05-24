@@ -19,4 +19,4 @@ type THandle = RequestHandler<
   IUpdateUserRequest
 >
 
-export type { TExecute, THandle }
+export type { TExecute, THandle, IExecuteParams }
