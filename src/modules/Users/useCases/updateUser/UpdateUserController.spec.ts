@@ -6,12 +6,12 @@ import { ISuperResponse } from '@shared/types/supertest'
 import {
   ICreateUserRequest,
   TCreateUserResponse
-} from '@common/types/users/createUser.types'
-import { TReadUsersResponse } from '@common/types/users/readUsers.types'
+} from '@common/types/users/useCases/createUser.types'
+import { TReadUsersResponse } from '@common/types/users/useCases/readUsers.types'
 import {
   IUpdateUserRequest,
   TUpdateUserResponse
-} from '@common/types/users/updateUser.types'
+} from '@common/types/users/useCases/updateUser.types'
 
 let response: ISuperResponse<TCreateUserResponse>
 

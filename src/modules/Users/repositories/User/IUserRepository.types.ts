@@ -1,6 +1,6 @@
-import { UserModel } from '../../entities/UserModel'
+import { UserModel } from '../../models/UserModel'
 
-import { IUserModel } from '@common/types/users/userModel.types'
+import { IUserModel } from '@common/types/users/models/userModel.types'
 
 type TCreate = (data: UserModel) => Promise<UserModel>
 

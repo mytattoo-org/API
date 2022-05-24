@@ -6,7 +6,7 @@
   "scripts": {
     "cd": "yarn install; yarn migrate; yarn build; yarn start",
     "ci": "yarn install; yarn migrate; yarn test; yarn dev",
-    "default": "yarn install; yarn migrate; yarn dev",
+    "docker:dev": "yarn install; yarn migrate; yarn dev",
     "test": "jest --runInBand --detectOpenHandles",
     "app:up": "docker-compose up",
     "api:entry": "docker exec -it myapi bash",

@@ -1,4 +1,4 @@
-import { AppError } from '@modules/Error/entities/AppError'
+import { AppError } from '@modules/Error/models/AppError'
 import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
 import { inject, injectable } from 'tsyringe'

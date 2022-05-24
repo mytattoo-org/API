@@ -1,11 +1,11 @@
 import { RequestHandler } from 'express'
 
+import { IUserModel } from '@common/types/users/models/userModel.types'
 import {
   IUpdateUserRequest,
   IUpdateUserRequestParams,
   TUpdateUserResponse
-} from '@common/types/users/updateUser.types'
-import { IUserModel } from '@common/types/users/userModel.types'
+} from '@common/types/users/useCases/updateUser.types'
 
 interface IExecuteParams extends IUpdateUserRequest {
   id: IUserModel['id']

@@ -1,4 +1,4 @@
-import { UserModel } from '../../entities/UserModel'
+import { UserModel } from '../../models/UserModel'
 import type { IUsersRepository } from './IUserRepository.types'
 
 import { query } from '@shared/database'

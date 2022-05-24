@@ -3,7 +3,7 @@ import { RequestHandler } from 'express'
 import {
   IReadUsersRequestParams,
   TReadUsersResponse
-} from '@common/types/users/readUsers.types'
+} from '@common/types/users/useCases/readUsers.types'
 
 type TExecute = (
   id?: IReadUsersRequestParams['id']

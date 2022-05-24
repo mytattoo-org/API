@@ -4,8 +4,8 @@ import { UpdateUserService } from './UpdateUserService'
 
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
 
-import { TCreateUserResponse } from '@common/types/users/createUser.types'
-import { TReadUsersResponse } from '@common/types/users/readUsers.types'
+import { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
+import { TReadUsersResponse } from '@common/types/users/useCases/readUsers.types'
 
 describe('UpdateUserService', () => {
   it('should be able to update username', async () => {

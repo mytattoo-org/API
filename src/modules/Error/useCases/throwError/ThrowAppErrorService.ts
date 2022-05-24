@@ -1,4 +1,4 @@
-import { AppError } from '../../entities/AppError'
+import { AppError } from '../../models/AppError'
 import { TExecute } from './ThrowAppError.types'
 
 class ThrowAppErrorService {

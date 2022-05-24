@@ -7,8 +7,6 @@ class DeleteUserController {
   handle: THandle = async (req, res) => {
     const id = req.params.id
 
-    console.log(id)
-
     const deleteUserService = container.resolve(DeleteUserService)
 
     const response = await deleteUserService.execute(id)

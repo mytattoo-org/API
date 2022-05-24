@@ -1,5 +1,5 @@
 import type { TExecute } from './SignIn.types'
-import { AppError } from '@modules/Error/entities/AppError'
+import { AppError } from '@modules/Error/models/AppError'
 
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'

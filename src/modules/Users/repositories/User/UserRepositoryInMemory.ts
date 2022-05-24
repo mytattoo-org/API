@@ -1,4 +1,4 @@
-import { UserModel } from '@modules/Users/entities/UserModel'
+import { UserModel } from '@modules/Users/models/UserModel'
 import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
 class UsersRepositoryInMemory implements IUsersRepository {
