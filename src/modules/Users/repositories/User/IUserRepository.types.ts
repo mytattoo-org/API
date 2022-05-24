@@ -1,5 +1,7 @@
 import { UserModel } from '../../entities/UserModel'
 
+import { IUserModel } from '@common/types/users/userModel.types'
+
 type TCreate = (data: UserModel) => Promise<UserModel>
 
 type TFindById = (id: UserModel['id']) => Promise<UserModel>
@@ -16,7 +18,10 @@ type TFindByEmail = (
 
 type TDelete = (id: UserModel['id']) => Promise<void>
 
+type TUpdate = (data: Partial<IUserModel>) => Promise<void>
+
 interface IUsersRepository {
+  update: TUpdate
   create: TCreate
   delete: TDelete
   findAll: TFindAll

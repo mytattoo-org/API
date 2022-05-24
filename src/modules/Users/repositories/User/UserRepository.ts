@@ -4,6 +4,31 @@ import type { IUsersRepository } from './IUserRepository.types'
 import { query } from '@shared/database'
 
 class UsersRepository implements IUsersRepository {
+  update: IUsersRepository['update'] = async data => {
+    let queryData = ''
+
+    const update = (name: string, value: string) =>
+      `
+        UPDATE
+          users
+        SET
+          ${name} = '${value}'
+        WHERE
+          id = '${data.id}';
+      `
+
+    const dataToUpdate: string[][] = Object.entries(data)
+
+    for (let i = 0; i < dataToUpdate.length; i++) {
+      const name = dataToUpdate[i][0]
+      const value = dataToUpdate[i][1]
+
+      if (name && value) queryData = queryData + update(name, value)
+    }
+
+    await query<UserModel>(queryData)
+  }
+
   create: IUsersRepository['create'] = async ({
     created_at,
     id,

@@ -20,6 +20,15 @@ class UsersRepositoryInMemory implements IUsersRepository {
     this.users.splice(indexToDelete, 1)
   }
 
+  update: IUsersRepository['update'] = async data => {
+    const indexOfUserToBeUpdated = this.users.findIndex(
+      ({ id }) => id === data.id
+    )
+    let userToBeUpdated = this.users[indexOfUserToBeUpdated]
+
+    userToBeUpdated = { ...userToBeUpdated, ...data }
+  }
+
   findById: IUsersRepository['findById'] = async id =>
     this.users.find(user => user.id === id)
 
