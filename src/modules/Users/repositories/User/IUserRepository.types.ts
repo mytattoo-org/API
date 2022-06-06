@@ -18,7 +18,7 @@ type TFindByEmail = (
 
 type TDelete = (id: UserModel['id']) => Promise<void>
 
-type TUpdate = (data: Partial<IUserModel>) => Promise<void>
+type TUpdate = (data: Partial<IUserModel>) => Promise<UserModel>
 
 interface IUsersRepository {
   update: TUpdate

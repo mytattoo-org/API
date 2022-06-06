@@ -27,6 +27,10 @@ class UsersRepository implements IUsersRepository {
     }
 
     await query<UserModel>(queryData)
+
+    const updatedUser = await this.findById(data.id)
+
+    return updatedUser
   }
 
   create: IUsersRepository['create'] = async ({

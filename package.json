@@ -7,7 +7,7 @@
     "cd": "yarn install; yarn migrate; yarn build; yarn start",
     "ci": "yarn install; yarn migrate; yarn test; yarn dev",
     "docker:dev": "yarn install; yarn migrate; yarn dev",
-    "test": "jest --runInBand --detectOpenHandles",
+    "test": "jest --runInBand",
     "app:up": "docker-compose up",
     "api:entry": "docker exec -it myapi bash",
     "docker:test": "docker exec myapi yarn test --coverage=false",

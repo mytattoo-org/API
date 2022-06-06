@@ -4,13 +4,19 @@ import type { TExecute } from './UpdateUser.types'
 
 import { AppError } from '@modules/Error/models/AppError'
 import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
+
 @injectable()
 class UpdateUserService {
-  constructor(
+  constructor (
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository) { }
+    private usersRepository: IUsersRepository
+  ) {}
 
   execute: TExecute = async dataToUpdate => {
+    const user = await this.usersRepository.findById(dataToUpdate.id)
+
+    if (!user) throw new AppError('User not found', 400)
+
     if (
       dataToUpdate.username &&
       (await this.usersRepository.findByUsername(dataToUpdate.username))
@@ -23,9 +29,7 @@ class UpdateUserService {
     )
       throw new AppError('Email already exists')
 
-    await this.usersRepository.update(dataToUpdate)
-
-    const updatedUser = await this.usersRepository.findById(dataToUpdate.id)
+    const updatedUser = await this.usersRepository.update(dataToUpdate)
 
     return { updatedUser }
   }

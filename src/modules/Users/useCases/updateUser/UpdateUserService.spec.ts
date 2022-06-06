@@ -68,7 +68,18 @@ describe('UpdateUserService', () => {
     )
 
     expect(user.id).toBe(updatedUser.id)
-    expect(user.username).toBe(updatedUser.username)
+    expect(updateUserData.username).toBe(updatedUser.username)
+  })
+
+  it('should not be able to update if user does not found', async () => {
+    const updateUserData: IExecuteParams = {
+      id: '0',
+      username: 'InSTinToS0'
+    }
+
+    expect(() =>
+      updateUserService.execute(updateUserData)
+    ).rejects.toBeInstanceOf(AppError)
   })
 
   it('it should not be able to change to an existing username', async () => {

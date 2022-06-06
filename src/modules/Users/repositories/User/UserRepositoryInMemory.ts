@@ -24,9 +24,12 @@ class UsersRepositoryInMemory implements IUsersRepository {
     const indexOfUserToBeUpdated = this.users.findIndex(
       ({ id }) => id === data.id
     )
+
     let userToBeUpdated = this.users[indexOfUserToBeUpdated]
 
     userToBeUpdated = { ...userToBeUpdated, ...data }
+
+    return userToBeUpdated
   }
 
   findById: IUsersRepository['findById'] = async id =>
