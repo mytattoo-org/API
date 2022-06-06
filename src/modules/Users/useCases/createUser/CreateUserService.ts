@@ -1,7 +1,7 @@
 import type { TExecute } from './CreateUser.types'
 
-import { AppError } from '@modules/Error/entities/AppError'
-import { UserModel } from '@modules/Users/entities/UserModel'
+import { AppError } from '@modules/Error/models/AppError'
+import { UserModel } from '@modules/Users/models/UserModel'
 
 import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'

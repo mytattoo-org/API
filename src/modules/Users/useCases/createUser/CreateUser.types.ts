@@ -3,7 +3,7 @@ import { RequestHandler } from 'express'
 import type {
   ICreateUserRequest,
   TCreateUserResponse
-} from '@common/types/users/createUser.types'
+} from '@common/types/users/useCases/createUser.types'
 
 type THandle = RequestHandler<void, TCreateUserResponse, ICreateUserRequest>
 

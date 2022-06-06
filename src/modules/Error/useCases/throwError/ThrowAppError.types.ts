@@ -1,8 +1,8 @@
 import { ErrorRequestHandler } from 'express'
 
-import { AppError } from '@modules/Error/entities/AppError'
+import { AppError } from '@modules/Error/models/AppError'
 
-import type { IThrowAppErrorResponse } from '@common/types/errors/ThrowAppError.types'
+import type { IThrowAppErrorResponse } from '@common/types/errors/useCases/ThrowAppError.types'
 
 type THandle = ErrorRequestHandler<any, IThrowAppErrorResponse>
 

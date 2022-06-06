@@ -1,6 +1,6 @@
 import { ThrowAppErrorService } from './ThrowAppErrorService'
 
-import { AppError } from '@modules/Error/entities/AppError'
+import { AppError } from '@modules/Error/models/AppError'
 
 let throwAppErrorService: ThrowAppErrorService
 

@@ -6,7 +6,7 @@ import { ISuperResponse } from '@shared/types/supertest'
 import type {
   ICreateUserRequest,
   TCreateUserResponse
-} from '@common/types/users/createUser.types'
+} from '@common/types/users/useCases/createUser.types'
 
 let response: ISuperResponse<TCreateUserResponse>
 

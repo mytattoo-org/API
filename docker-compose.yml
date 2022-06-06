@@ -1,6 +1,4 @@
-#! if you change the container_names change it everywhere else too
-
-version: '2'
+version: '3'
 
 networks:
   network:

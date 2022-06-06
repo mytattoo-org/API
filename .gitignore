@@ -3,6 +3,7 @@ node_modules
 dist
 yarn-error.log
 /src/temp/*
+/src/submodules/**/*
 .vscode
 coverage
 yarn.lock

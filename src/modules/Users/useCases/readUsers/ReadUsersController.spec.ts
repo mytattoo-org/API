@@ -3,8 +3,8 @@ import request from 'supertest'
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
 
-import { TCreateUserResponse } from '@common/types/users/createUser.types'
-import { TReadUsersResponse } from '@common/types/users/readUsers.types'
+import { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
+import { TReadUsersResponse } from '@common/types/users/useCases/readUsers.types'
 
 describe('ReadUserController', () => {
   it('should be able to read a user using id', async () => {
