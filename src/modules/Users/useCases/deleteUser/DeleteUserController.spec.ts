@@ -1,7 +1,5 @@
 import request from 'supertest'
 
-import { AppError } from '@modules/Error/models/AppError'
-
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
 

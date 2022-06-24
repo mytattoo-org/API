@@ -5,6 +5,8 @@ import { DeleteUserController } from '@modules/Users/useCases/deleteUser/DeleteU
 import { ReadUsersController } from '@modules/Users/useCases/readUsers/ReadUsersController'
 import { UpdateUserController } from '@modules/Users/useCases/updateUser/UpdateUserController'
 
+import { ensureAuthentication } from '@shared/middlewares/ensureAuthentication'
+
 const usersRoutes = Router()
 
 const readUsersController = new ReadUsersController()
@@ -12,9 +14,11 @@ const createUserController = new CreateUserController()
 const updateUserController = new UpdateUserController()
 const deleteUserController = new DeleteUserController()
 
-usersRoutes.post('/', createUserController.handle)
-usersRoutes.get('/:id?', readUsersController.handle)
-usersRoutes.patch('/:id', updateUserController.handle)
-usersRoutes.delete('/:id', deleteUserController.handle)
+usersRoutes.post('/users/', createUserController.handle)
+usersRoutes.get('/users/:id?', readUsersController.handle)
+usersRoutes.patch('/users/:id', updateUserController.handle)
+usersRoutes.delete('/users/:id', deleteUserController.handle)
+
+usersRoutes.get('/user', ensureAuthentication, readUsersController.handle)
 
 export { usersRoutes }

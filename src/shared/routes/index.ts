@@ -18,7 +18,7 @@ app.use(express.json())
 
 app.use('/docs', swagger.serve, swagger.setup(swaggerDocument))
 
-app.use('/users', usersRoutes)
+app.use(usersRoutes)
 app.use('/auth', authRoutes)
 
 app.use(errorHandler)
