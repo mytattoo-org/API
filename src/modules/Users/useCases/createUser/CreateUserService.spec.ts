@@ -59,7 +59,7 @@ describe('CreateUserService', () => {
     await createUserService.execute(createUserData)
 
     const createSecondUserData: ICreateUserRequest = {
-      username: 'InSTinToS',
+      username: 'instintos',
       password: 'Miguel@1234',
       email: 'InSTinToS2@instintos.com'
     }

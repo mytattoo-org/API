@@ -23,7 +23,7 @@ class SignInService {
 
     const foundUser = usernameOrEmail.includes('@')
       ? await this.usersRepository.findByEmail(usernameOrEmail)
-      : await this.usersRepository.findByUsername(usernameOrEmail)
+      : await this.usersRepository.findByUsername(usernameOrEmail, true)
 
     if (!foundUser) throw new AppError('Invalid email or password', 401)
 

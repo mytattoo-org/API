@@ -14,7 +14,7 @@ class ReadUsersService {
     if (id) {
       const user = await this.usersRepository.findById(id)
 
-      return { user: { ...user, password: undefined } }
+      return user ? { user: { ...user, password: undefined } } : undefined
     }
 
     const users = await this.usersRepository.findAll()
@@ -24,7 +24,7 @@ class ReadUsersService {
       password: undefined
     }))
 
-    return { users: usersWithoutPassword }
+    return users ? { users: usersWithoutPassword } : undefined
   }
 }
 

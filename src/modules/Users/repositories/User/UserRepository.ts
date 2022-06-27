@@ -97,7 +97,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByUsername: IUsersRepository['findByUsername'] = async username => {
-    const queryData = `SELECT * FROM Users WHERE username='${username}'`
+    const queryData = `SELECT * FROM Users WHERE lower(username)='${username.toLowerCase()}'`
 
     const foundUser = (await query<UserModel>(queryData)).rows[0]
 

@@ -27,7 +27,7 @@ describe('SignInService', () => {
 
     const signInResponse = await signInService.execute({
       password: 'Miguel@1234',
-      usernameOrEmail: createUserData.email
+      usernameOrEmail: 'instintos'
     })
 
     expect(signInResponse.id).toBe(createUserResponse.createdUser.id)

@@ -21,7 +21,7 @@ class CreateUserService {
     if (foundUserByEmail) throw new AppError('E-mail already exists', 400)
 
     const foundUserByUsername = await this.usersRepository.findByUsername(
-      data.username
+      data.username, true
     )
 
     if (foundUserByUsername) throw new AppError('Username already exists', 400)
