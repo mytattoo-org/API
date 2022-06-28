@@ -29,7 +29,7 @@ describe('DeleteUserController', () => {
       app
     ).get(`/users/${deletedResponse.body.deletedUser.id}`)
 
-    expect(foundDeletedUser.body.user).toStrictEqual({})
+    expect(foundDeletedUser.body.user).toBeFalsy()
   })
 
   it('should not be able to delete a non-existing user', async () => {

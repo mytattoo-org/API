@@ -13,8 +13,7 @@ class ReadUsersController {
 
     const response = await readUsersService.execute(id)
 
-    if (res.locals.user?.id && !response?.user)
-      throw new AppError('Not found user with this token', 404)
+    if (!response) throw new AppError('User or users Not found', 404)
 
     res.json(response).status(200)
   }

@@ -39,7 +39,9 @@ class UsersRepositoryInMemory implements IUsersRepository {
     this.users.find(user => user.email === email)
 
   findByUsername: IUsersRepository['findByUsername'] = async username =>
-    this.users.find(user => user.username === username)
+    this.users.find(
+      user => user.username.toLowerCase() === username.toLowerCase()
+    )
 
   findAll: IUsersRepository['findAll'] = async () => this.users
 }

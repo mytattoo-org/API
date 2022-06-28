@@ -16,15 +16,15 @@ class CreateUserService {
   ) {}
 
   execute: TExecute = async data => {
-    const foundUserByEmail = await this.usersRepository.findByEmail(data.email)
+    const foundByEmail = await this.usersRepository.findByEmail(data.email)
 
-    if (foundUserByEmail) throw new AppError('E-mail already exists', 400)
+    if (foundByEmail) throw new AppError('E-mail already exists', 400)
 
-    const foundUserByUsername = await this.usersRepository.findByUsername(
-      data.username, true
+    const foundByUser = await this.usersRepository.findByUsername(
+      data.username
     )
 
-    if (foundUserByUsername) throw new AppError('Username already exists', 400)
+    if (foundByUser) throw new AppError('Username already exists', 400)
 
     const newUser = new UserModel()
 

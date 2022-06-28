@@ -52,6 +52,31 @@ describe('ReadUserController', () => {
     await request(app).delete(`/users/${createdUser.id}`)
   })
 
+  it('should not be able to read a user with invalid token', async () => {
+    const createdUserResponse: ISuperResponse<TCreateUserResponse> =
+      await request(app).post('/users').send({
+        username: 'InSTinToS2',
+        password: 'Miguel@1234',
+        email: 'instintos2@instintos.com'
+      })
+
+    const createdUser = createdUserResponse.body.createdUser
+
+    await request(app)
+      .post('/auth/sign-in')
+      .send({ usernameOrEmail: createdUser.username, password: 'Miguel@1234' })
+
+    const readUserResponse: ISuperResponse<TReadUsersResponse> = await request(
+      app
+    )
+      .get(`/user`)
+      .set({ Authorization: `invalidToken` })
+
+    expect(readUserResponse.body.error).toBe('Invalid token')
+
+    await request(app).delete(`/users/${createdUser.id}`)
+  })
+
   it('should be able to read all users', async () => {
     const createdUserResponse: ISuperResponse<TCreateUserResponse> =
       await request(app).post('/users').send({

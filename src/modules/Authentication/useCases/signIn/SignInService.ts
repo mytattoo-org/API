@@ -23,7 +23,7 @@ class SignInService {
 
     const foundUser = usernameOrEmail.includes('@')
       ? await this.usersRepository.findByEmail(usernameOrEmail)
-      : await this.usersRepository.findByUsername(usernameOrEmail, true)
+      : await this.usersRepository.findByUsername(usernameOrEmail)
 
     if (!foundUser) throw new AppError('Invalid email or password', 401)
 
@@ -32,8 +32,8 @@ class SignInService {
     if (!authorized) throw new AppError('Invalid email or password', 401)
 
     const token = jwt.sign({}, process.env.API_JWT_SECRET, {
+      expiresIn: '1d',
       subject: foundUser.id,
-      expiresIn: '1d'
     })
 
     return { token, id: foundUser.id }

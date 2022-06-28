@@ -1,5 +1,6 @@
 import { DeleteUserService } from './DeleteUserService'
 
+import { AppError } from '@modules/Error/models/AppError'
 import { UsersRepository } from '@modules/Users/repositories/User/UserRepository'
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
 
@@ -30,5 +31,9 @@ describe('DeleteUserService', () => {
 
     expect(foundUser).toBe(undefined)
     expect(deletedUser).toMatchObject(dataToCreate)
+  })
+
+  it('should not be able to delete a not found user', async () => {
+    expect(deleteUserService.execute('0')).rejects.toBeInstanceOf(AppError)
   })
 })

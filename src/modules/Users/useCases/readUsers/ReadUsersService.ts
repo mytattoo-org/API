@@ -24,7 +24,7 @@ class ReadUsersService {
       password: undefined
     }))
 
-    return users ? { users: usersWithoutPassword } : undefined
+    return { users: usersWithoutPassword }
   }
 }
 
