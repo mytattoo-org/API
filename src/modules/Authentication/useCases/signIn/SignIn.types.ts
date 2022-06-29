@@ -3,7 +3,7 @@ import { RequestHandler } from 'express'
 import type {
   ISignInRequest,
   TSignInResponse
-} from '@common/types/authentication/signIn.types'
+} from '@common/types/authentication/useCases/signIn.types'
 
 type THandle = RequestHandler<void, TSignInResponse, ISignInRequest>
 

@@ -7,7 +7,7 @@ class UsersRepository implements IUsersRepository {
   update: IUsersRepository['update'] = async data => {
     let queryData = ''
 
-    const update = (name: string, value: string) =>
+    const updateQuery = (name: string, value: string) =>
       `
         UPDATE
           users
@@ -23,7 +23,7 @@ class UsersRepository implements IUsersRepository {
       const name = dataToUpdate[i][0]
       const value = dataToUpdate[i][1]
 
-      if (name && value) queryData = queryData + update(name, value)
+      if (name && value) queryData = queryData + updateQuery(name, value)
     }
 
     await query<UserModel>(queryData)
