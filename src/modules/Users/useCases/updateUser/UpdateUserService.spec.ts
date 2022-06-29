@@ -85,7 +85,7 @@ describe('UpdateUserService', () => {
   it('it should not be able to change to an existing username', async () => {
     expect(
       updateUserService.execute({
-        username: 'InSTinToS2',
+        username: 'instintos2',
         id: createdUserResponse.createdUser.id
       })
     ).rejects.toBeInstanceOf(AppError)
@@ -94,7 +94,7 @@ describe('UpdateUserService', () => {
   it('it should not be able to change to an existing email', async () => {
     expect(
       updateUserService.execute({
-        email: 'instintos2@instintos.com',
+        email: 'instintoS2@instintos.com',
         id: createdUserResponse.createdUser.id
       })
     ).rejects.toBeInstanceOf(AppError)

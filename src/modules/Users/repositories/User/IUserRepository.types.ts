@@ -9,8 +9,7 @@ type TFindById = (id: UserModel['id']) => Promise<UserModel>
 type TFindAll = () => Promise<UserModel[]>
 
 type TFindByUsername = (
-  username: UserModel['username'],
-  insensitive?: boolean
+  username: UserModel['username']
 ) => Promise<UserModel | undefined>
 
 type TFindByEmail = (

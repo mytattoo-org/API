@@ -89,7 +89,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByEmail: IUsersRepository['findByEmail'] = async email => {
-    const queryData = `SELECT * FROM Users WHERE email='${email}'`
+    const queryData = `SELECT * FROM Users WHERE lower(email)='${email.toLowerCase()}'`
 
     const foundUser = (await query<UserModel>(queryData)).rows[0]
 
