@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import { inject, injectable } from 'tsyringe'
 
 import type { TExecute } from './UpdateUser.types'
@@ -7,15 +8,24 @@ import { IUsersRepository } from '@modules/Users/repositories/User/IUserReposito
 
 @injectable()
 class UpdateUserService {
-  constructor (
+  constructor(
     @inject("UsersRepository")
-    private usersRepository: IUsersRepository
-  ) {}
+    private usersRepository: IUsersRepository)
+  {}
 
   execute: TExecute = async dataToUpdate => {
     const user = await this.usersRepository.findById(dataToUpdate.id)
 
     if (!user) throw new AppError('User not found', 400)
+
+    if (!dataToUpdate.password) throw new AppError('Invalid password')
+
+    const authorized = await bcrypt.compare(
+      dataToUpdate.password,
+      user.password
+    )
+
+    if (!authorized) throw new AppError('Invalid password')
 
     if (
       dataToUpdate.username &&
@@ -29,7 +39,13 @@ class UpdateUserService {
     )
       throw new AppError('Email already exists')
 
-    const updatedUser = await this.usersRepository.update(dataToUpdate)
+    const finalDataToUpdate = {
+      ...dataToUpdate,
+      password: bcrypt.hashSync(dataToUpdate.newPassword, 10),
+      newPassword: undefined
+    }
+
+    const updatedUser = await this.usersRepository.update(finalDataToUpdate)
 
     return { updatedUser }
   }
