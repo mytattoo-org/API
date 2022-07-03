@@ -1,7 +1,7 @@
 import request from 'supertest'
 
 import { app } from '@shared/routes'
-import { ISuperResponse } from '@shared/types/supertest'
+import type { ISuperResponse } from '@shared/types/supertest'
 
 import type {
   ICreateUserRequest,

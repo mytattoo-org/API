@@ -1,11 +1,11 @@
 import request from 'supertest'
 
 import { app } from '@shared/routes'
-import { ISuperResponse } from '@shared/types/supertest'
+import type { ISuperResponse } from '@shared/types/supertest'
 
-import { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
-import { TDeleteUserResponse } from '@common/types/users/useCases/deleteUser.types'
-import { TReadUsersResponse } from '@common/types/users/useCases/readUsers.types'
+import type { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
+import type { TDeleteUserResponse } from '@common/types/users/useCases/deleteUser.types'
+import type { TReadUsersResponse } from '@common/types/users/useCases/readUsers.types'
 
 describe('DeleteUserController', () => {
   it('should be able to delete a user', async () => {

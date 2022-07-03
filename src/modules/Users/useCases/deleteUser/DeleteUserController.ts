@@ -1,6 +1,6 @@
 import { container } from 'tsyringe'
 
-import { THandle } from '../deleteUser/DeleteUser.types'
+import type { THandle } from '../deleteUser/DeleteUser.types'
 import { DeleteUserService } from './DeleteUserService'
 
 class DeleteUserController {

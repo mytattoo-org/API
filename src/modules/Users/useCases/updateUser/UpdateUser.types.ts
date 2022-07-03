@@ -1,7 +1,7 @@
 import { RequestHandler } from 'express'
 
-import { IUserModel } from '@common/types/users/models/userModel.types'
-import {
+import type { IUserModel } from '@common/types/users/models/userModel.types'
+import type {
   IUpdateUserRequest,
   IUpdateUserRequestParams,
   TUpdateUserResponse

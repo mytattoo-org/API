@@ -1,7 +1,7 @@
 import { CreateUserService } from '../createUser/CreateUserService'
 
 import { AppError } from '@modules/Error/models/AppError'
-import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
+import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
 
 import type { ICreateUserRequest } from '@common/types/users/useCases/createUser.types'

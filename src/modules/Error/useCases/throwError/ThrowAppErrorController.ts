@@ -1,4 +1,4 @@
-import { THandle } from './ThrowAppError.types'
+import type { THandle } from './ThrowAppError.types'
 import { ThrowAppErrorService } from './ThrowAppErrorService'
 
 class ThrowAppErrorController {

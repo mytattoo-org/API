@@ -8,7 +8,7 @@ class UpdateUserController {
 
     const response = await updateUserService.execute({
       ...req.body,
-      id: res.locals.user?.id
+      id: res.locals.user.id
     })
 
     res.json(response).status(200)

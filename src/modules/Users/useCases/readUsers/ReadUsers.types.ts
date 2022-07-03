@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
 
-import {
+import type {
   IReadUsersRequestParams,
   TReadUsersResponse
 } from '@common/types/users/useCases/readUsers.types'

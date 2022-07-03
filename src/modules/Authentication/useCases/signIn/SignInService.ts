@@ -1,10 +1,10 @@
-import type { TExecute } from './SignIn.types'
-import { AppError } from '@modules/Error/models/AppError'
-
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { inject, injectable } from 'tsyringe'
 
+import type { TExecute } from './SignIn.types'
+
+import { AppError } from '@modules/Error/models/AppError'
 import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
 @injectable()
@@ -16,10 +16,7 @@ class SignInService {
 
   execute: TExecute = async ({ usernameOrEmail, password }) => {
     if (!usernameOrEmail || !password)
-      throw new AppError(
-        'Need to provide username or email, and password',
-        400
-      )
+      throw new AppError('Need to provide username or email, and password', 400)
 
     const foundUser = usernameOrEmail.includes('@')
       ? await this.usersRepository.findByEmail(usernameOrEmail)
@@ -33,7 +30,7 @@ class SignInService {
 
     const token = jwt.sign({}, process.env.API_JWT_SECRET, {
       expiresIn: '1d',
-      subject: foundUser.id,
+      subject: foundUser.id
     })
 
     return { token, id: foundUser.id }

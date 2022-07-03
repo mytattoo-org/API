@@ -8,7 +8,7 @@ import { bufferToB64 } from '@shared/utils/b64'
 
 @injectable()
 class ReadUsersService {
-  constructor (
+  constructor(
     @inject('UsersRepository') private usersRepository: IUsersRepository
   ) {}
 

@@ -1,6 +1,6 @@
 import { RequestHandler } from 'express'
 
-import {
+import type {
   IDeleteUserRequestParams,
   TDeleteUserResponse
 } from '@common/types/users/useCases/deleteUser.types'

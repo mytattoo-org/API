@@ -1,7 +1,7 @@
 import { SignInService } from './SignInService'
 
 import { AppError } from '@modules/Error/models/AppError'
-import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
+import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
 import { CreateUserService } from '@modules/Users/useCases/createUser/CreateUserService'
 
