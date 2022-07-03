@@ -11,14 +11,17 @@ import { ThrowAppErrorController } from '@modules/Error/useCases/throwError/Thro
 import { swaggerDocument } from '@docs/swaggerDocument'
 
 const app = express()
+
 const errorHandler = new ThrowAppErrorController().handle
 
 app.use(cors())
-app.use(express.json())
+
+app.use(express.json({ limit: '50mb' }))
 
 app.use('/docs', swagger.serve, swagger.setup(swaggerDocument))
 
 app.use(usersRoutes)
+
 app.use('/auth', authRoutes)
 
 app.use(errorHandler)

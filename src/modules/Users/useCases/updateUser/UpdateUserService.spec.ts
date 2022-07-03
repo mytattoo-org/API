@@ -53,6 +53,21 @@ describe('UpdateUserService', () => {
     deleteUserService.execute(createdSecondUserResponse.createdUser.id)
   })
 
+  it('should be able to encode and decote the avatar', () => {
+    const b64toBlob = (base64: string) => {
+      const binaryAvatar = Buffer.from(base64, 'base64')
+
+      const base64Avatar = binaryAvatar.toString('base64')
+
+      console.log('binaryAvatar', binaryAvatar)
+      console.log('base64Avatar', base64Avatar)
+    }
+
+    b64toBlob(
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAhwAAADSAgMAAAB87fECAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACVBMVEUAAADLODf///8EXxL6AAAAAXRSTlMAQObYZgAAAAFiS0dEAmYLfGQAAAAHdElNRQfhCAkCAi0o2YxVAAAAwElEQVR42u3asRGAIAxAURr3s7FxPxumtLHihMt5QS3er0PyBqBs/6hwcHBwcHBwcHBwcHBwcHCkO/Y66rimhkM1tKqzmYODg4ODg4ODg4ODg4ODY7qjOdxxNG+frOLg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4OCY7Aj9M+Dg4ODg4ODg4ODg4ODg4PjKEev+cEYcHBwcHBwcHBwcHBwcHByJjlDLcMda3oqDg4ODg4ODg4ODg4ODgyPSCV7wh+HNgMmcAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDE3LTA4LTA5VDAyOjAyOjQ0KzAwOjAw39Y9SwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAxNy0wOC0wOVQwMjowMjo0NCswMDowMK6LhfcAAAAASUVORK5CYII='
+    )
+  })
+
   it('should be able to update username', async () => {
     const updateUserData: IExecuteParams = {
       username: 'InSTinToS3',

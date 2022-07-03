@@ -6,19 +6,19 @@ import type { TExecute } from './UpdateUser.types'
 import { AppError } from '@modules/Error/models/AppError'
 import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
+import { b64ToBuffer } from '@shared/utils/b64'
+
 @injectable()
 class UpdateUserService {
   constructor(
-    @inject("UsersRepository")
-    private usersRepository: IUsersRepository)
-  {}
+    @inject('UsersRepository')
+    private usersRepository: IUsersRepository
+  ) {}
 
   execute: TExecute = async dataToUpdate => {
     const user = await this.usersRepository.findById(dataToUpdate.id)
 
     if (!user) throw new AppError('User not found', 400)
-
-    if (!dataToUpdate.password) throw new AppError('Invalid password')
 
     const authorized = await bcrypt.compare(
       dataToUpdate.password,
@@ -39,13 +39,22 @@ class UpdateUserService {
     )
       throw new AppError('Email already exists')
 
+    let avatarToUpdate = dataToUpdate.avatar
+
+    if (avatarToUpdate) avatarToUpdate = b64ToBuffer(avatarToUpdate)
+
     const finalDataToUpdate = {
       ...dataToUpdate,
-      password: bcrypt.hashSync(dataToUpdate.newPassword, 10),
-      newPassword: undefined
+      avatar: avatarToUpdate,
+      newPassword: undefined,
+      password: dataToUpdate.newPassword
+        ? bcrypt.hashSync(dataToUpdate.newPassword, 10)
+        : undefined
     }
 
     const updatedUser = await this.usersRepository.update(finalDataToUpdate)
+
+    updatedUser.avatar = avatarToUpdate
 
     return { updatedUser }
   }

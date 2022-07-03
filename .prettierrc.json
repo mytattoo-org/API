@@ -6,10 +6,17 @@
   "endOfLine": "auto",
   "jsxSingleQuote": true,
   "arrowParens": "avoid",
+
   "bracketSpacing": true,
   "trailingComma": "none",
   "importOrderSeparation": true,
   "importOrderSortSpecifiers": true,
+  "importOrderParserPlugins": [
+    "classProperties",
+    "decorators-legacy",
+    "proposal-decorators",
+    "typescript"
+  ],
   "importOrder": [
     "<THIRD_PARTY_MODULES>",
     "^../|^./",

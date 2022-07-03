@@ -6,7 +6,7 @@ class UserModel implements IUserModel {
   id: string
   bio?: string
   email: string
-  avatar?: string
+  avatar?: any
   password: string
   username: string
   created_at: string

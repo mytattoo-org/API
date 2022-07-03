@@ -16,8 +16,8 @@ const deleteUserController = new DeleteUserController()
 
 usersRoutes.post('/users/', createUserController.handle)
 usersRoutes.get('/users/:id?', readUsersController.handle)
-usersRoutes.patch('/users', ensureAuthentication, updateUserController.handle)
 usersRoutes.delete('/users/:id', deleteUserController.handle)
+usersRoutes.patch('/users', ensureAuthentication, updateUserController.handle)
 
 usersRoutes.get('/user', ensureAuthentication, readUsersController.handle)
 
