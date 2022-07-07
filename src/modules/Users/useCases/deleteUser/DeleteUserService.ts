@@ -5,6 +5,8 @@ import type { TExecute } from './DeleteUser.types'
 import { AppError } from '@modules/Error/models/AppError'
 import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
+import { bufferToB64 } from '@shared/utils/b64'
+
 @injectable()
 class DeleteUserService {
   constructor(
@@ -19,7 +21,9 @@ class DeleteUserService {
 
     await this.usersRepository.delete(id)
 
-    return { deletedUser: foundUser }
+    return {
+      deletedUser: { ...foundUser, avatar: bufferToB64(foundUser.avatar) }
+    }
   }
 }
 

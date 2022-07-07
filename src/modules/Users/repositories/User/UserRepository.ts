@@ -17,7 +17,7 @@ class UsersRepository implements IUsersRepository {
           id = '${data.id}';
       `
 
-    const dataToUpdate: string[][] = Object.entries(data)
+    const dataToUpdate: any[][] = Object.entries(data)
 
     for (let i = 0; i < dataToUpdate.length; i++) {
       const name = dataToUpdate[i][0]
@@ -34,12 +34,12 @@ class UsersRepository implements IUsersRepository {
   }
 
   create: IUsersRepository['create'] = async ({
-    created_at,
     id,
     email,
     password,
-    updated_at,
-    username
+    username,
+    created_at,
+    updated_at
   }) => {
     const queryData = `
       INSERT INTO users (

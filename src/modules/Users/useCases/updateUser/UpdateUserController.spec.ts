@@ -56,7 +56,7 @@ describe('UpdateUserController', () => {
     const updatedUserResponse: ISuperResponse<TUpdateUserResponse> =
       await request(app)
         .patch(`/users`)
-        .send({ password: 'Miguel@1234', newPassword: 'Miguel@12345' })
+        .send({ password: 'Miguel@1234', new_password: 'Miguel@12345' })
         .set({ Authorization: `Bearer ${signInResponse.body.token}` })
 
     const signInSecondResponse: ISuperResponse<TSignInResponse> = await request(

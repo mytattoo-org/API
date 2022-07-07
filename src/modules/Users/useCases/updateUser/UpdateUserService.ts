@@ -43,21 +43,22 @@ class UpdateUserService {
 
     const finalDataToUpdate = {
       ...dataToUpdate,
-      newPassword: undefined,
+      new_password: undefined,
       avatar: dataToUpdate.avatar
         ? b64ToBuffer(dataToUpdate.avatar)
         : undefined,
-      password: dataToUpdate.newPassword
-        ? bcrypt.hashSync(dataToUpdate.newPassword, 10)
+      password: dataToUpdate.new_password
+        ? bcrypt.hashSync(dataToUpdate.new_password, 10)
         : undefined
     }
 
     const updatedUser = await this.usersRepository.update(finalDataToUpdate)
 
-    updatedUser.avatar = finalDataToUpdate.avatar
     updatedUser.password = undefined
 
-    return { updatedUser }
+    return {
+      updatedUser: { ...updatedUser, avatar: dataToUpdate.avatar }
+    }
   }
 }
 
