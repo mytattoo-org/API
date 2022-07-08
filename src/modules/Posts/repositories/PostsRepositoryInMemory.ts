@@ -1,7 +1,7 @@
 import { PostModel } from '../models/PostModel.'
 import { IPostsRepository } from './IPostsRepository.types'
 
-class PostRepositoryInMemory implements IPostsRepository {
+class PostsRepositoryInMemory implements IPostsRepository {
   private posts: PostModel[] = []
 
   create: IPostsRepository['create'] = async data => {
@@ -36,4 +36,4 @@ class PostRepositoryInMemory implements IPostsRepository {
   findAll: IPostsRepository['findAll'] = async () => this.posts
 }
 
-export { PostRepositoryInMemory }
+export { PostsRepositoryInMemory }

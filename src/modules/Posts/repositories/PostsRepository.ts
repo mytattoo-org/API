@@ -7,10 +7,15 @@ import { IPostModel } from '@common/types/posts/models/postModel.types'
 
 class PostsRepository implements IPostsRepository {
   update: (data: Partial<IPostModel>) => Promise<IPostModel>
-  delete: (id: string) => Promise<void>
+
+  delete: IPostsRepository['delete'] = async id => {
+    const queryData = `DELETE FROM Posts WHERE id='${id}'`
+
+    await query(queryData)
+  }
 
   findById: IPostsRepository['findById'] = async id => {
-    const queryData = `SELECT * FROM Posts  WHERE id='${id}'`
+    const queryData = `SELECT * FROM Posts WHERE id='${id}'`
 
     const allPosts = (await query<PostModel>(queryData)).rows[0]
 

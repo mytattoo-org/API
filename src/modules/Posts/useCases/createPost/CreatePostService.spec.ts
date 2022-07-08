@@ -1,6 +1,6 @@
 import { CreatePostService } from './CreatePostService'
 
-import { PostRepositoryInMemory } from '@modules/Posts/repositories/PostRepositoryInMemory'
+import { PostsRepositoryInMemory } from '@modules/Posts/repositories/PostsRepositoryInMemory'
 import { UsersRepositoryInMemory } from '@modules/Users/repositories/User/UserRepositoryInMemory'
 import { CreateUserService } from '@modules/Users/useCases/createUser/CreateUserService'
 
@@ -8,15 +8,15 @@ import { bufferToB64 } from '@shared/utils/b64'
 
 let createPostService: CreatePostService
 let createUserService: CreateUserService
-let postRepository: PostRepositoryInMemory
+let postsRepository: PostsRepositoryInMemory
 let usersRepository: UsersRepositoryInMemory
 
 describe('CreatePostService', () => {
   beforeEach(() => {
-    postRepository = new PostRepositoryInMemory()
+    postsRepository = new PostsRepositoryInMemory()
     usersRepository = new UsersRepositoryInMemory()
     createUserService = new CreateUserService(usersRepository)
-    createPostService = new CreatePostService(postRepository, usersRepository)
+    createPostService = new CreatePostService(postsRepository, usersRepository)
   })
 
   it('should be able to create a new Post', async () => {
@@ -27,7 +27,6 @@ describe('CreatePostService', () => {
     })
 
     const dataToCreate = { image: 'any-image', user_id: createdUser.id }
-
     const { createdPost } = await createPostService.execute(dataToCreate)
 
     expect({
@@ -35,7 +34,7 @@ describe('CreatePostService', () => {
       user_id: createdPost.user_id
     }).toStrictEqual(dataToCreate)
 
-    const posts = await postRepository.findAll()
+    const posts = await postsRepository.findAll()
 
     expect({
       user_id: posts[0].user_id,

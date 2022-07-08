@@ -37,10 +37,7 @@ class CreatePostService {
     const createdPost = await this.postsRepository.create(newPost)
 
     return {
-      createdPost: {
-        ...createdPost,
-        image: bufferToB64(createdPost.image)
-      }
+      createdPost: { ...createdPost, image: bufferToB64(createdPost.image) }
     }
   }
 }

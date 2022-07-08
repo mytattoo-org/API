@@ -1,22 +1,14 @@
 import { RequestHandler } from 'express'
 
-import { IPostModel } from '@common/types/posts/models/postModel.types'
-import { IUserModel } from '@common/types/users/models/userModel.types'
-
-interface ICreatePostRequest {
-  image: string
-  user_id: IUserModel['id']
-  description?: IPostModel['description']
-}
-
-interface ICreatePostResponse {
-  createdPost: Omit<IPostModel, 'image'> & { image: string }
-}
+import {
+  ICreatePostRequest,
+  TCreatePostResponse
+} from '@common/types/posts/useCases/createPost.types'
 
 type TExecute = (
   dataToCreate: ICreatePostRequest
-) => Promise<ICreatePostResponse>
+) => Promise<TCreatePostResponse>
 
-type THandle = RequestHandler<void, ICreatePostResponse, ICreatePostRequest>
+type THandle = RequestHandler<void, TCreatePostResponse, ICreatePostRequest>
 
-export type { TExecute, THandle, ICreatePostResponse }
+export type { TExecute, THandle }
