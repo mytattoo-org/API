@@ -3,10 +3,29 @@ import { IPostsRepository } from './IPostsRepository.types'
 
 import { query } from '@shared/database'
 
-import { IPostModel } from '@common/types/posts/models/postModel.types'
+import type { IFeedModel } from '@common/types/posts/models/feedModel.types'
 
 class PostsRepository implements IPostsRepository {
-  update: (data: Partial<IPostModel>) => Promise<IPostModel>
+  joinUsers: IPostsRepository['joinUsers'] = async () => {
+    const queryData = `
+      SELECT
+        p.image,
+          p.created_at,
+          p.description,
+          p.id,
+          p.user_id,
+          u.username,
+          u.avatar,
+          u.artist
+      FROM Posts p
+      INNER JOIN Users u
+      ON p.user_id = u.id
+    `
+
+    const postsJoinedWithUsers = (await query<IFeedModel>(queryData)).rows
+
+    return postsJoinedWithUsers
+  }
 
   delete: IPostsRepository['delete'] = async id => {
     const queryData = `DELETE FROM Posts WHERE id='${id}'`
@@ -17,9 +36,9 @@ class PostsRepository implements IPostsRepository {
   findById: IPostsRepository['findById'] = async id => {
     const queryData = `SELECT * FROM Posts WHERE id='${id}'`
 
-    const allPosts = (await query<PostModel>(queryData)).rows[0]
+    const post = (await query<PostModel>(queryData)).rows[0]
 
-    return allPosts
+    return post
   }
 
   findAll: IPostsRepository['findAll'] = async () => {

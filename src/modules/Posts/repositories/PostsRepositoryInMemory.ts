@@ -1,7 +1,11 @@
 import { PostModel } from '../models/PostModel.'
 import { IPostsRepository } from './IPostsRepository.types'
 
+import { IFeedModel } from '@common/types/posts/models/feedModel.types'
+
 class PostsRepositoryInMemory implements IPostsRepository {
+  joinUsers: () => Promise<IFeedModel[]>
+
   private posts: PostModel[] = []
 
   create: IPostsRepository['create'] = async data => {
@@ -18,16 +22,6 @@ class PostsRepositoryInMemory implements IPostsRepository {
     const indexToDelete = this.posts.findIndex(post => post.id === id)
 
     this.posts.splice(indexToDelete, 1)
-  }
-
-  update: IPostsRepository['update'] = async data => {
-    const foundIndex = this.posts.findIndex(({ id }) => id === data.id)
-
-    let postToBeUpdated = this.posts[foundIndex]
-
-    postToBeUpdated = { ...postToBeUpdated, ...data }
-
-    return postToBeUpdated
   }
 
   findById: IPostsRepository['findById'] = async id =>

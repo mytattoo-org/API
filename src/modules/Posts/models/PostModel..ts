@@ -1,6 +1,6 @@
 import { v4 as uuid } from 'uuid'
 
-import type { IPostModel } from '@common/types/posts/models/postModel.types'
+import { IPostModel } from '@common/types/posts/models/PostModel.types'
 
 class PostModel implements IPostModel {
   id: string

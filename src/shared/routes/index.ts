@@ -21,7 +21,7 @@ app.use('/docs', swagger.serve, swagger.setup(swaggerDocument))
 
 app.use(usersRoutes)
 app.use('/auth', authRoutes)
-app.use('/posts', postsRoutes)
+app.use(postsRoutes)
 
 app.use(errorHandler)
 

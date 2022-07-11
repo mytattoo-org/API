@@ -3,11 +3,11 @@ import request from 'supertest'
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
 
-import { IPostModel } from '@common/types/posts/models/postModel.types'
-import { TCreatePostResponse } from '@common/types/posts/useCases/createPost.types'
-import { TReadPostsResponse } from '@common/types/posts/useCases/readPosts.types'
-import { IUserModel } from '@common/types/users/models/userModel.types'
-import { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
+import type { IPostModel } from '@common/types/posts/models/PostModel.types'
+import type { TCreatePostResponse } from '@common/types/posts/useCases/createPost.types'
+import type { TReadPostsResponse } from '@common/types/posts/useCases/readPosts.types'
+import type { IUserModel } from '@common/types/users/models/userModel.types'
+import type { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
 
 let userId: IUserModel['id']
 let postId: IPostModel['id']
