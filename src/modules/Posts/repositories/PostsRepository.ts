@@ -20,6 +20,7 @@ class PostsRepository implements IPostsRepository {
       FROM Posts p
       INNER JOIN Users u
       ON p.user_id = u.id
+      ORDER BY p.created_at DESC
     `
 
     const postsJoinedWithUsers = (await query<IFeedModel>(queryData)).rows

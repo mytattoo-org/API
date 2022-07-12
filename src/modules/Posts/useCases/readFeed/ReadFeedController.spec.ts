@@ -3,7 +3,7 @@ import request from 'supertest'
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
 
-import { IPostModel } from '@common/types/posts/models/PostModel.types'
+import { IPostModel } from '@common/types/posts/models/postModel.types'
 import { TCreatePostResponse } from '@common/types/posts/useCases/createPost.types'
 import { TFeedResponse } from '@common/types/posts/useCases/readFeed.types'
 import { IUser, IUserModel } from '@common/types/users/models/userModel.types'

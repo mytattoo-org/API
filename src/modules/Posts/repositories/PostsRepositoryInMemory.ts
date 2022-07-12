@@ -4,9 +4,9 @@ import { IPostsRepository } from './IPostsRepository.types'
 import { IFeedModel } from '@common/types/posts/models/feedModel.types'
 
 class PostsRepositoryInMemory implements IPostsRepository {
-  joinUsers: () => Promise<IFeedModel[]>
-
   private posts: PostModel[] = []
+
+  joinUsers: () => Promise<IFeedModel[]>
 
   create: IPostsRepository['create'] = async data => {
     const newUser = new PostModel()

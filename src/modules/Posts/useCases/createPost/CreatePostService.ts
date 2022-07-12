@@ -4,10 +4,12 @@ import { TExecute } from './CreatePost.types'
 
 import { AppError } from '@modules/Error/models/AppError'
 import { PostModel } from '@modules/Posts/models/PostModel.'
-import { IPostsRepository } from '@modules/Posts/repositories/IPostsRepository.types'
-import { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
+import type { IPostsRepository } from '@modules/Posts/repositories/IPostsRepository.types'
+import type { IUsersRepository } from '@modules/Users/repositories/User/IUserRepository.types'
 
 import { b64ToBuffer, bufferToB64 } from '@shared/utils/b64'
+
+import type { IFeed } from '@common/types/posts/models/feedModel.types'
 
 @injectable()
 class CreatePostService {
@@ -34,11 +36,25 @@ class CreatePostService {
       image: b64ToBuffer(dataToCreate.image)
     })
 
-    const createdPost = await this.postsRepository.create(newPost)
-
-    return {
-      createdPost: { ...createdPost, image: bufferToB64(createdPost.image) }
+    const createdPost = {
+      ...(await this.postsRepository.create(newPost)),
+      image: dataToCreate.image
     }
+
+    const createdFeed: IFeed = {
+      author: {
+        id: foundUser.id,
+        artist: foundUser.artist,
+        username: foundUser.username,
+        avatar: bufferToB64(foundUser.avatar)
+      },
+      id: createdPost.id,
+      image: dataToCreate.image,
+      created_at: createdPost.created_at,
+      description: createdPost.description
+    }
+
+    return { createdPost, createdFeed }
   }
 }
 
