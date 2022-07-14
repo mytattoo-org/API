@@ -44,4 +44,4 @@ jobs:
         run: docker-compose up -d
 
       - name: Run tests
-        run: yarn docker:test
+        run: yarn ci:test

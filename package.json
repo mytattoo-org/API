@@ -10,7 +10,7 @@
     "test": "clear && jest --runInBand",
     "app:up": "docker-compose up",
     "api:entry": "docker exec -it myapi bash",
-    "docker:test": "docker exec myapi yarn test --coverage=false",
+    "ci:test": "docker exec myapi yarn jest --runInBand --collectCoverage=false",
     "build": "babel src --extensions \".ts,.js\" --out-dir dist --copy-files ",
     "docker:prune": "docker-compose down && docker system prune -a -f --volumes",
     "migrate": "dotenv -- cross-var \"pg-migrations apply -D ./src/shared/migrations/ -c postgres://%DB_USER%:%DB_PASSWORD%@mydatabase:%DB_PORT%/%DB_NAME%\"",
