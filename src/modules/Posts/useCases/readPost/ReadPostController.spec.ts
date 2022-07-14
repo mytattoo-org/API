@@ -3,6 +3,7 @@ import request from 'supertest'
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
 
+import { TSignInResponse } from '@common/types/authentication/useCases/signIn.types'
 import type { IPostModel } from '@common/types/posts/models/postModel.types'
 import type { TCreatePostResponse } from '@common/types/posts/useCases/createPost.types'
 import type { TReadPostsResponse } from '@common/types/posts/useCases/readPosts.types'
@@ -32,9 +33,14 @@ describe('ReadPostController', () => {
   it('should be able to read a single post', async () => {
     const dataToCreate = { image: 'any-image', user_id: userId }
 
+    const tokenResponse: ISuperResponse<TSignInResponse> = await request(app)
+      .post('/auth/sign-in')
+      .send({ usernameOrEmail: 'InSTinToS', password: 'Miguel@1234' })
+
     const response: ISuperResponse<TCreatePostResponse> = await request(app)
       .post('/posts')
       .send(dataToCreate)
+      .set({ Authorization: `Bearer ${tokenResponse.body.token}` })
 
     const {
       body: { post }
@@ -50,12 +56,20 @@ describe('ReadPostController', () => {
   it('should be able to read multiple posts', async () => {
     const dataToCreate = { image: 'any-image', user_id: userId }
 
+    const tokenResponse: ISuperResponse<TSignInResponse> = await request(app)
+      .post('/auth/sign-in')
+      .send({ usernameOrEmail: 'InSTinToS', password: 'Miguel@1234' })
+
     const response: ISuperResponse<TCreatePostResponse> = await request(app)
       .post('/posts')
       .send(dataToCreate)
+      .set({ Authorization: `Bearer ${tokenResponse.body.token}` })
 
     const secondPostResponse: ISuperResponse<TCreatePostResponse> =
-      await request(app).post('/posts').send(dataToCreate)
+      await request(app)
+        .post('/posts')
+        .send(dataToCreate)
+        .set({ Authorization: `Bearer ${tokenResponse.body.token}` })
 
     const {
       body: { posts }

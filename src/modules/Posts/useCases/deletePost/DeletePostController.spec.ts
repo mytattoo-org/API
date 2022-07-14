@@ -3,6 +3,7 @@ import request from 'supertest'
 import { app } from '@shared/routes'
 import { ISuperResponse } from '@shared/types/supertest'
 
+import { TSignInResponse } from '@common/types/authentication/useCases/signIn.types'
 import { TCreatePostResponse } from '@common/types/posts/useCases/createPost.types'
 import { IUserModel } from '@common/types/users/models/userModel.types'
 import { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
@@ -28,9 +29,14 @@ describe('ReadPostController', () => {
   it('should be able to delete a single post', async () => {
     const dataToCreate = { image: 'any-image', user_id: userId }
 
+    const tokenResponse: ISuperResponse<TSignInResponse> = await request(app)
+      .post('/auth/sign-in')
+      .send({ usernameOrEmail: 'InSTinToS', password: 'Miguel@1234' })
+
     const response: ISuperResponse<TCreatePostResponse> = await request(app)
       .post('/posts')
       .send(dataToCreate)
+      .set({ Authorization: `Bearer ${tokenResponse.body.token}` })
 
     await request(app).delete(`/posts/${response.body.createdPost.id}`)
 
