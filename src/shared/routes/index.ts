@@ -4,6 +4,7 @@ import 'express-async-errors'
 import swagger from 'swagger-ui-express'
 
 import { authRoutes } from './auth.routes'
+import { commentsRoutes } from './comments.routes'
 import { likesRoutes } from './likes.routes'
 import { postsRoutes } from './posts.routes'
 import { usersRoutes } from './users.routes'
@@ -24,6 +25,7 @@ app.use(usersRoutes)
 app.use('/auth', authRoutes)
 app.use(postsRoutes)
 app.use(likesRoutes)
+app.use(commentsRoutes)
 
 app.use(errorHandler)
 

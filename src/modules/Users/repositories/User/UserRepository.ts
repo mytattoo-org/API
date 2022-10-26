@@ -5,18 +5,17 @@ import { query } from '@shared/database'
 
 class UsersRepository implements IUsersRepository {
   update: IUsersRepository['update'] = async data => {
-    let queryData = ''
-
     const updateQuery = (name: string, value: string) =>
       `
         UPDATE
-          users
+          "User"
         SET
-          ${name} = '${value}'
+          "${name}" = '${value}'
         WHERE
-          id = '${data.id}';
+          "id" = '${data.id}';
       `
 
+    let queryData = ''
     const dataToUpdate: any[][] = Object.entries(data)
 
     for (let i = 0; i < dataToUpdate.length; i++) {
@@ -42,13 +41,13 @@ class UsersRepository implements IUsersRepository {
     updated_at
   }) => {
     const queryData = `
-      INSERT INTO users (
-        id,
-        email,
-        username,
-        password,
-        created_at,
-        updated_at
+      INSERT INTO "User" (
+        "id",
+        "email",
+        "username",
+        "password",
+        "created_at",
+        "updated_at"
       ) VALUES (
         '${id}',
         '${email}',
@@ -67,13 +66,13 @@ class UsersRepository implements IUsersRepository {
   }
 
   delete: IUsersRepository['delete'] = async id => {
-    const queryData = `DELETE FROM Users WHERE id='${id}'`
+    const queryData = `DELETE FROM "User" WHERE "id"='${id}';`
 
     await query(queryData)
   }
 
   findAll: IUsersRepository['findAll'] = async () => {
-    const queryData = 'SELECT * FROM Users'
+    const queryData = 'SELECT * FROM "User";'
 
     const allUsers = (await query<UserModel>(queryData)).rows
 
@@ -81,7 +80,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   findById: IUsersRepository['findById'] = async id => {
-    const queryData = `SELECT * FROM Users WHERE id='${id}'`
+    const queryData = `SELECT * FROM "User" WHERE "id"='${id}';`
 
     const foundUser = (await query<UserModel>(queryData)).rows[0]
 
@@ -89,7 +88,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByEmail: IUsersRepository['findByEmail'] = async email => {
-    const queryData = `SELECT * FROM Users WHERE lower(email)='${email.toLowerCase()}'`
+    const queryData = `SELECT * FROM "User" WHERE lower("email")='${email.toLowerCase()}';`
 
     const foundUser = (await query<UserModel>(queryData)).rows[0]
 
@@ -97,7 +96,7 @@ class UsersRepository implements IUsersRepository {
   }
 
   findByUsername: IUsersRepository['findByUsername'] = async username => {
-    const queryData = `SELECT * FROM Users WHERE lower(username)='${username.toLowerCase()}'`
+    const queryData = `SELECT * FROM "User" WHERE lower("username")='${username.toLowerCase()}';`
 
     const foundUser = (await query<UserModel>(queryData)).rows[0]
 

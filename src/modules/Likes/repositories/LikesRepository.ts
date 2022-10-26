@@ -5,7 +5,7 @@ import { query } from '@shared/database'
 
 class LikesRepository implements ILikesRepository {
   findById: ILikesRepository['findById'] = async (id: string) => {
-    const queryData = `SELECT * FROM Likes WHERE id='${id}'`
+    const queryData = `SELECT * FROM "Like" WHERE "id"='${id}';`
 
     const like = (await query<LikeModel>(queryData)).rows[0]
 
@@ -13,7 +13,7 @@ class LikesRepository implements ILikesRepository {
   }
 
   findByUserId: ILikesRepository['findByUserId'] = async id => {
-    const queryData = `SELECT * FROM Likes WHERE user_id='${id}'`
+    const queryData = `SELECT * FROM "Like" WHERE "user_id"='${id}';`
 
     const like = (await query<LikeModel>(queryData)).rows
 
@@ -21,7 +21,7 @@ class LikesRepository implements ILikesRepository {
   }
 
   findByPostId: ILikesRepository['findByPostId'] = async id => {
-    const queryData = `SELECT * FROM Likes WHERE post_id='${id}'`
+    const queryData = `SELECT * FROM "Like" WHERE "post_id"='${id}';`
 
     const like = (await query<LikeModel>(queryData)).rows
 
@@ -29,21 +29,21 @@ class LikesRepository implements ILikesRepository {
   }
 
   delete: ILikesRepository['delete'] = async id => {
-    const queryData = `DELETE FROM Likes WHERE id='${id}'`
+    const queryData = `DELETE FROM "Like" WHERE "id"='${id}';`
 
     await query(queryData)
   }
 
   create: ILikesRepository['create'] = async ({ id, post_id, user_id }) => {
     const queryData = `
-      INSERT INTO Likes (
-        id,
-        user_id,
-        post_id
+      INSERT INTO "Like" (
+        "id",
+        "user_id",
+        "post_id"
       ) VALUES (
-        '${id}',
-        '${user_id}',
-        '${post_id}'
+       '${id}',
+       '${user_id}',
+       '${post_id}'
       );
     `
 

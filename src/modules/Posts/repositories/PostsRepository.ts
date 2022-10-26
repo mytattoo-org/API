@@ -10,17 +10,18 @@ class PostsRepository implements IPostsRepository {
     const queryData = `
       SELECT
         p.image,
-          p.created_at,
-          p.description,
-          p.id,
-          p.user_id,
-          u.username,
-          u.avatar,
-          u.artist
-      FROM Posts p
-      INNER JOIN Users u
+        p.created_at,
+        p.description,
+        p.id,
+        p.user_id,
+        u.username,
+        u.avatar,
+        u.artist
+      FROM "Post" p
+      INNER JOIN "User" u
       ON p.user_id = u.id
-      ORDER BY p.created_at DESC
+      ORDER BY p.created_at
+      DESC;
     `
 
     const postsJoinedWithUsers = (await query<IFeedModel>(queryData)).rows
@@ -29,13 +30,13 @@ class PostsRepository implements IPostsRepository {
   }
 
   delete: IPostsRepository['delete'] = async id => {
-    const queryData = `DELETE FROM Posts WHERE id='${id}'`
+    const queryData = `DELETE FROM "Post" WHERE "id"='${id}';`
 
     await query(queryData)
   }
 
   findById: IPostsRepository['findById'] = async id => {
-    const queryData = `SELECT * FROM Posts WHERE id='${id}'`
+    const queryData = `SELECT * FROM "Post" WHERE "id"='${id}';`
 
     const post = (await query<PostModel>(queryData)).rows[0]
 
@@ -43,7 +44,7 @@ class PostsRepository implements IPostsRepository {
   }
 
   findAll: IPostsRepository['findAll'] = async () => {
-    const queryData = 'SELECT * FROM Posts'
+    const queryData = 'SELECT * FROM "Post";'
 
     const allPosts = (await query<PostModel>(queryData)).rows
 
@@ -59,13 +60,13 @@ class PostsRepository implements IPostsRepository {
     updated_at
   }) => {
     const queryData = `
-      INSERT INTO Posts (
-        id,
-        image,
-        user_id,
-        created_at,
-        updated_at,
-        description
+      INSERT INTO "Post" (
+        "id",
+        "image",
+        "user_id",
+        "created_at",
+        "updated_at",
+        "description"
       ) VALUES (
         '${id}',
         '${image}',

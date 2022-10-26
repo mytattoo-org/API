@@ -1,5 +1,7 @@
 import { container } from 'tsyringe'
 
+import { CommentsRepository } from '@modules/Comments/repositories/CommentsRepository'
+import { ICommentsRepository } from '@modules/Comments/repositories/ICommentsRepository.types'
 import type { ILikesRepository } from '@modules/Likes/repositories/ILikesRepository.types'
 import { LikesRepository } from '@modules/Likes/repositories/LikesRepository'
 import type { IPostsRepository } from '@modules/Posts/repositories/IPostsRepository.types'
@@ -20,4 +22,9 @@ container.registerSingleton<IPostsRepository>(
 container.registerSingleton<ILikesRepository>(
   'LikesRepository',
   LikesRepository
+)
+
+container.registerSingleton<ICommentsRepository>(
+  'CommentsRepository',
+  CommentsRepository
 )
