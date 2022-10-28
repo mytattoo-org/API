@@ -7,7 +7,7 @@ class ReadFeedController {
   handle: THandle = async (req, res) => {
     const readFeedService = container.resolve(ReadFeedService)
 
-    const response = await readFeedService.execute()
+    const response = await readFeedService.execute(res.locals?.user?.id)
 
     return res.json(response).status(200)
   }

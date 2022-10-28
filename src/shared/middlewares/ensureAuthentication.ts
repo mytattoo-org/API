@@ -12,6 +12,7 @@ const ensureAuthentication: RequestHandler<any> = async (req, res, next) => {
 
   try {
     const { sub } = jwt.verify(token, process.env.API_JWT_SECRET)
+
     res.locals.user = { id: sub }
   } catch (error) {
     throw new AppError('Invalid token', 401)

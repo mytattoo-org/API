@@ -10,6 +10,15 @@ type TFindById = (id: ILikeModel['id']) => Promise<ILikeModel>
 
 type TFindByPostId = (postId: IPostModel['id']) => Promise<ILikeModel[]>
 
+interface IFindByUserAndPostId {
+  userId: IUserModel['id']
+  postId: IPostModel['id']
+}
+
+type TFindByUserAndPostId = (
+  params: IFindByUserAndPostId
+) => Promise<ILikeModel[]>
+
 type TDelete = (id: ILikeModel['id']) => Promise<void>
 
 interface ILikesRepository {
@@ -18,6 +27,7 @@ interface ILikesRepository {
   findById: TFindById
   findByUserId: TFindByUserId
   findByPostId: TFindByPostId
+  findByUserAndPostId: TFindByUserAndPostId
 }
 
 export type { ILikesRepository }

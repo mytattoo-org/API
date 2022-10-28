@@ -8,9 +8,9 @@ import { ensureAuthentication } from '@shared/middlewares/ensureAuthentication'
 
 const likesRoutes = Router()
 
+const readLikeController = new ReadLikeController()
 const createLikeController = new CreateLikeController()
 const deleteLikeController = new DeleteLikeController()
-const readLikeController = new ReadLikeController()
 
 likesRoutes.get('/likes', readLikeController.handle)
 likesRoutes.post('/likes', ensureAuthentication, createLikeController.handle)

@@ -12,6 +12,21 @@ class LikesRepository implements ILikesRepository {
     return like
   }
 
+  findByUserAndPostId: ILikesRepository['findByUserAndPostId'] = async ({
+    postId,
+    userId
+  }) => {
+    const queryData = `
+      SELECT * FROM "Like"
+      WHERE "user_id"='${userId}'
+      AND "post_id"='${postId}';
+    `
+
+    const like = (await query<LikeModel>(queryData)).rows
+
+    return like
+  }
+
   findByUserId: ILikesRepository['findByUserId'] = async id => {
     const queryData = `SELECT * FROM "Like" WHERE "user_id"='${id}';`
 

@@ -6,6 +6,7 @@ import { ReadFeedController } from '@modules/Posts/useCases/readFeed/ReadFeedCon
 import { ReadPostController } from '@modules/Posts/useCases/readPost/ReadPostController'
 
 import { ensureAuthentication } from '@shared/middlewares/ensureAuthentication'
+import { maybeAuthenticated } from '@shared/middlewares/maybeAuthenticated'
 
 const postsRoutes = Router()
 
@@ -19,6 +20,6 @@ postsRoutes.get('/posts/:id', readPostsController.handle)
 postsRoutes.post('/posts', ensureAuthentication, createPostController.handle)
 postsRoutes.delete('/posts/:id', deletePostController.handle)
 
-postsRoutes.get('/feed', readFeedController.handle)
+postsRoutes.get('/feed', maybeAuthenticated, readFeedController.handle)
 
 export { postsRoutes }
