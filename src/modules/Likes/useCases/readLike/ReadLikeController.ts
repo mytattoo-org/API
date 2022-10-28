@@ -12,6 +12,9 @@ class ReadLikeController {
       user_id: req.body.user_id
     })
 
+    if (!response.likes && !response.like)
+      return res.json({ likes: [] }).status(200)
+
     return res.json(response).status(200)
   }
 }

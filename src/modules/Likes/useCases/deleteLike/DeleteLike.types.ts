@@ -1,18 +1,12 @@
 import { RequestHandler } from 'express'
 
 import {
-  IDeleteLikeRequestParams,
+  IDeleteLikeRequest,
   TDeleteLikeResponse
 } from '@common/types/likes/useCases/deleteLike.types'
 
-type TExecute = (
-  id: IDeleteLikeRequestParams['id']
-) => Promise<TDeleteLikeResponse>
+type TExecute = (like: IDeleteLikeRequest) => Promise<TDeleteLikeResponse>
 
-type THandle = RequestHandler<
-  IDeleteLikeRequestParams,
-  TDeleteLikeResponse,
-  void
->
+type THandle = RequestHandler<void, TDeleteLikeResponse, IDeleteLikeRequest>
 
 export type { TExecute, THandle }

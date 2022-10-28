@@ -12,12 +12,12 @@ class DeleteLikeService {
     private likesRepository: LikesRepository
   ) {}
 
-  execute: TExecute = async id => {
-    const foundLike = await this.likesRepository.findById(id)
+  execute: TExecute = async like => {
+    const foundLike = await this.likesRepository.findByUserAndPostId(like)
 
     if (!foundLike) throw new AppError('Like not found')
 
-    await this.likesRepository.delete(id)
+    await this.likesRepository.delete(like)
 
     return { deletedLike: foundLike }
   }

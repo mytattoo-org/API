@@ -37,7 +37,7 @@ class CreateUserService {
       createdUser: {
         ...createdUser,
         password: undefined,
-        avatar: bufferToB64(createdUser.avatar)
+        avatar: bufferToB64(createdUser?.avatar)
       }
     }
   }

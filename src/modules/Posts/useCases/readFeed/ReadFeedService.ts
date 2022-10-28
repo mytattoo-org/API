@@ -27,8 +27,8 @@ class ReadFeedService {
     for (const post of posts) {
       const foundLike = authenticatedUserId
         ? await this.likesRepository.findByUserAndPostId({
-            postId: post.id,
-            userId: authenticatedUserId
+            post_id: post.id,
+            user_id: authenticatedUserId
           })
         : false
 

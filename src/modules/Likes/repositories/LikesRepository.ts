@@ -4,17 +4,9 @@ import { ILikesRepository } from './ILikesRepository.types'
 import { query } from '@shared/database'
 
 class LikesRepository implements ILikesRepository {
-  findById: ILikesRepository['findById'] = async (id: string) => {
-    const queryData = `SELECT * FROM "Like" WHERE "id"='${id}';`
-
-    const like = (await query<LikeModel>(queryData)).rows[0]
-
-    return like
-  }
-
   findByUserAndPostId: ILikesRepository['findByUserAndPostId'] = async ({
-    postId,
-    userId
+    post_id: postId,
+    user_id: userId
   }) => {
     const queryData = `
       SELECT * FROM "Like"
@@ -22,7 +14,7 @@ class LikesRepository implements ILikesRepository {
       AND "post_id"='${postId}';
     `
 
-    const like = (await query<LikeModel>(queryData)).rows
+    const like = (await query<LikeModel>(queryData)).rows[0]
 
     return like
   }
@@ -30,43 +22,49 @@ class LikesRepository implements ILikesRepository {
   findByUserId: ILikesRepository['findByUserId'] = async id => {
     const queryData = `SELECT * FROM "Like" WHERE "user_id"='${id}';`
 
-    const like = (await query<LikeModel>(queryData)).rows
+    const likes = (await query<LikeModel>(queryData)).rows
 
-    return like
+    return likes
   }
 
   findByPostId: ILikesRepository['findByPostId'] = async id => {
     const queryData = `SELECT * FROM "Like" WHERE "post_id"='${id}';`
 
-    const like = (await query<LikeModel>(queryData)).rows
+    const likes = (await query<LikeModel>(queryData)).rows
 
-    return like
+    return likes
   }
 
-  delete: ILikesRepository['delete'] = async id => {
-    const queryData = `DELETE FROM "Like" WHERE "id"='${id}';`
+  delete: ILikesRepository['delete'] = async ({
+    post_id: postId,
+    user_id: userId
+  }) => {
+    const queryData = `
+      DELETE FROM "Like"
+      WHERE "user_id"='${userId}'
+      AND "post_id"='${postId}';
+    `
 
     await query(queryData)
   }
 
-  create: ILikesRepository['create'] = async ({ id, post_id, user_id }) => {
+  create: ILikesRepository['create'] = async ({
+    post_id: postId,
+    user_id: userId
+  }) => {
     const queryData = `
       INSERT INTO "Like" (
-        "id",
         "user_id",
         "post_id"
       ) VALUES (
-       '${id}',
-       '${user_id}',
-       '${post_id}'
-      );
+       '${userId}',
+       '${postId}'
+      ) RETURNING *;
     `
 
-    await query<LikeModel>(queryData)
+    const res = await query<LikeModel>(queryData)
 
-    const createdLike = await this.findById(id)
-
-    return createdLike
+    return res.rows[0]
   }
 }
 

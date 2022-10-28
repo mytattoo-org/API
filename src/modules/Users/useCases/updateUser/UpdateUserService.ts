@@ -47,8 +47,8 @@ class UpdateUserService {
       avatar: dataToUpdate.avatar
         ? b64ToBuffer(dataToUpdate.avatar)
         : undefined,
-      password: dataToUpdate.new_password
-        ? bcrypt.hashSync(dataToUpdate.new_password, 10)
+      password: dataToUpdate.newPassword
+        ? bcrypt.hashSync(dataToUpdate.newPassword, 10)
         : undefined
     }
 

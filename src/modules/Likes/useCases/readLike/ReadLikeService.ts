@@ -12,26 +12,20 @@ class ReadLikeService {
     private likesRepository: ILikesRepository
   ) {}
 
-  execute: TExecute = async ({ post_id, user_id }) => {
-    if (!post_id && !user_id)
-      throw new AppError('post_id or user_id needed', 400)
+  execute: TExecute = async ({ post_id: postId, user_id: userId }) => {
+    if (!postId && !userId) throw new AppError('post_id or user_id needed', 400)
 
-    if (post_id && user_id)
+    if (postId && userId)
       return {
-        likes: await this.likesRepository.findByUserAndPostId({
-          postId: post_id,
-          userId: user_id
+        like: await this.likesRepository.findByUserAndPostId({
+          post_id: postId,
+          user_id: userId
         })
       }
 
-    if (user_id)
-      return { likes: await this.likesRepository.findByUserId(user_id) }
-
-    if (post_id)
-      return { likes: await this.likesRepository.findByPostId(post_id) }
-
-    if (user_id)
-      return { likes: await this.likesRepository.findByUserId(user_id) }
+    return userId
+      ? { likes: await this.likesRepository.findByUserId(userId) }
+      : { likes: await this.likesRepository.findByPostId(postId) }
   }
 }
 

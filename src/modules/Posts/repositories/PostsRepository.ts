@@ -54,10 +54,10 @@ class PostsRepository implements IPostsRepository {
   create: IPostsRepository['create'] = async ({
     id,
     image,
-    user_id,
     description,
-    created_at,
-    updated_at
+    user_id: userId,
+    created_at: createdAt,
+    updated_at: updatedAt
   }) => {
     const queryData = `
       INSERT INTO "Post" (
@@ -70,16 +70,14 @@ class PostsRepository implements IPostsRepository {
       ) VALUES (
         '${id}',
         '${image}',
-        '${user_id}',
-        '${created_at}',
-        '${updated_at}',
+        '${userId}',
+        '${createdAt}',
+        '${updatedAt}',
         '${description}'
       );
     `
 
-    await query<PostModel>(queryData)
-
-    const createdPost = await this.findById(id)
+    const createdPost = (await query<PostModel>(queryData)).rows[0]
 
     return createdPost
   }

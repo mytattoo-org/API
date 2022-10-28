@@ -12,18 +12,17 @@ class ReadCommentsService {
     private commentsRepository: ICommentsRepository
   ) {}
 
-  execute: TExecute = async ({ post_id, user_id }) => {
-    if (!post_id && !user_id)
-      throw new AppError('post_id or user_id needed', 400)
+  execute: TExecute = async ({ post_id: postId, user_id: userId }) => {
+    if (!postId && !userId) throw new AppError('postId or userId needed', 400)
 
-    if (post_id && user_id)
-      throw new AppError('Which between post_id or user_id', 400)
+    if (postId && userId)
+      throw new AppError('Which between postId or userId', 400)
 
-    if (post_id)
-      return { comments: await this.commentsRepository.findByPostId(post_id) }
+    if (postId)
+      return { comments: await this.commentsRepository.findByPostId(postId) }
 
-    if (user_id)
-      return { comments: await this.commentsRepository.findByUserId(user_id) }
+    if (userId)
+      return { comments: await this.commentsRepository.findByUserId(userId) }
   }
 }
 

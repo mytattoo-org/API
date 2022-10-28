@@ -33,17 +33,17 @@ class CommentsRepository implements ICommentsRepository {
   findByUserId: ICommentsRepository['findByUserId'] = async id => {
     const queryData = `SELECT * FROM "Comment" WHERE "user_id"='${id}';`
 
-    const comment = (await query<CommentModel>(queryData)).rows
+    const comments = (await query<CommentModel>(queryData)).rows
 
-    return comment
+    return comments
   }
 
   findByPostId: ICommentsRepository['findByPostId'] = async id => {
     const queryData = `SELECT * FROM "Comment" WHERE "post_id"='${id}';`
 
-    const comment = (await query<CommentModel>(queryData)).rows
+    const comments = (await query<CommentModel>(queryData)).rows
 
-    return comment
+    return comments
   }
 
   delete: ICommentsRepository['delete'] = async id => {
@@ -78,9 +78,7 @@ class CommentsRepository implements ICommentsRepository {
       );
     `
 
-    await query<CommentModel>(queryData)
-
-    const createdComment = await this.findById(id)
+    const createdComment = (await query<CommentModel>(queryData)).rows[0]
 
     return createdComment
   }

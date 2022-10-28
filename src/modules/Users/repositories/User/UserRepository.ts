@@ -55,12 +55,10 @@ class UsersRepository implements IUsersRepository {
         '${password}',
         '${created_at}',
         '${updated_at}'
-      );
+      ) RETURNING *;
     `
 
-    await query<UserModel>(queryData)
-
-    const createdUser = await this.findById(id)
+    const createdUser = (await query<UserModel>(queryData)).rows[0]
 
     return createdUser
   }

@@ -42,16 +42,17 @@ class CreatePostService {
     }
 
     const createdFeed: IFeed = {
+      liked: false,
+      id: createdPost.id,
+      image: dataToCreate.image,
+      created_at: createdPost.created_at,
+      description: createdPost.description,
       author: {
         id: foundUser.id,
         artist: foundUser.artist,
         username: foundUser.username,
         avatar: bufferToB64(foundUser.avatar)
-      },
-      id: createdPost.id,
-      image: dataToCreate.image,
-      created_at: createdPost.created_at,
-      description: createdPost.description
+      }
     }
 
     return { createdPost, createdFeed }

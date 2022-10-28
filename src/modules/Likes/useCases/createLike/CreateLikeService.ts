@@ -33,15 +33,12 @@ class CreateLikeService {
 
     if (!userExists) throw new AppError('User not found', 404)
 
-    const foundByPostLike = await this.likesRepository.findByPostId(
-      dataToCreate.post_id
-    )
+    const foundByPost = await this.likesRepository.findByUserAndPostId({
+      post_id: dataToCreate.post_id,
+      user_id: dataToCreate.user_id
+    })
 
-    const likeAlreadyExists = foundByPostLike.find(
-      like => like.user_id === dataToCreate.user_id
-    )
-
-    if (likeAlreadyExists) throw new AppError('Like already exists', 400)
+    if (foundByPost) throw new AppError('Like already exists', 400)
 
     const newLike = new LikeModel()
 
