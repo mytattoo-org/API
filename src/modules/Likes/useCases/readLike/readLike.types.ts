@@ -1,12 +1,12 @@
 import { RequestHandler } from 'express'
 
 import {
-  IReadLikesRequestParams,
+  IReadLikesRequest,
   TReadLikesResponse
 } from '@common/types/likes/useCases/readLikes.types'
 
-type TExecute = (req: IReadLikesRequestParams) => Promise<TReadLikesResponse>
+type TExecute = (req: IReadLikesRequest) => Promise<TReadLikesResponse>
 
-type THandle = RequestHandler<void, TReadLikesResponse, IReadLikesRequestParams>
+type THandle = RequestHandler<void, TReadLikesResponse, IReadLikesRequest>
 
 export type { TExecute, THandle }
