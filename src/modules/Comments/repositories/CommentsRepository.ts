@@ -3,6 +3,8 @@ import { ICommentsRepository } from './ICommentsRepository.types'
 
 import { query } from '@shared/database'
 
+import { ICommentUserModel } from '@common/types/comments/models/commentUserModel'
+
 class CommentsRepository implements ICommentsRepository {
   create: ICommentsRepository['create'] = async ({
     id,
@@ -52,9 +54,26 @@ class CommentsRepository implements ICommentsRepository {
   }
 
   findByPostId: ICommentsRepository['findByPostId'] = async id => {
-    const queryData = `SELECT * FROM "Comment" WHERE "post_id"='${id}';`
+    const queryData = `
+      SELECT
+        c.id,
+        c.content,
+        c.post_id,
+        c.user_id,
+        c.updated_at,
+        c.created_at,
+        u.artist,
+        u.avatar,
+        u.username
+      FROM "Comment" c
+      INNER JOIN "User" u
+      ON c.user_id = u.id
+      WHERE c.post_id = '${id}'
+      ORDER BY c.created_at
+      DESC;
+    `
 
-    const comments = (await query<CommentModel>(queryData)).rows
+    const comments = (await query<ICommentUserModel>(queryData)).rows
 
     return comments
   }

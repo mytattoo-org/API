@@ -5,6 +5,8 @@ import { TExecute } from './readComments.types'
 import { ICommentsRepository } from '@modules/Comments/repositories/ICommentsRepository.types'
 import { AppError } from '@modules/Error/models/AppError'
 
+import { ICommentUser } from '@common/types/comments/models/commentUserModel'
+
 @injectable()
 class ReadCommentsService {
   constructor(
@@ -23,9 +25,20 @@ class ReadCommentsService {
         })
       }
 
-    return postId
-      ? { comments: await this.commentsRepository.findByPostId(postId) }
-      : { comments: await this.commentsRepository.findByUserId(userId) }
+    if (postId) {
+      const comments = await this.commentsRepository.findByPostId(postId)
+
+      const formattedComments: ICommentUser[] = comments.map(
+        ({ artist, avatar, user_id: authorId, username, ...rest }) => ({
+          author: { avatar, artist, username, id: authorId },
+          ...rest
+        })
+      )
+
+      return { comments: formattedComments }
+    }
+
+    return { comments: await this.commentsRepository.findByUserId(userId) }
   }
 }
 

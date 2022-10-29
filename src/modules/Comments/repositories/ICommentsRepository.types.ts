@@ -1,4 +1,5 @@
 import { ICommentModel } from '@common/types/comments/models/commentModel'
+import { ICommentUserModel } from '@common/types/comments/models/commentUserModel'
 import type { IPostModel } from '@common/types/posts/models/postModel.types'
 import type { IUserModel } from '@common/types/users/models/userModel.types'
 
@@ -16,7 +17,7 @@ type TDelete = (id: ICommentModel['id']) => Promise<void>
 type TCreate = (data: ICommentModel) => Promise<ICommentModel>
 type TFindById = (id: ICommentModel['id']) => Promise<ICommentModel>
 type TFindByUserId = (userId: IUserModel['id']) => Promise<ICommentModel[]>
-type TFindByPostId = (postId: IPostModel['id']) => Promise<ICommentModel[]>
+type TFindByPostId = (postId: IPostModel['id']) => Promise<ICommentUserModel[]>
 
 interface ICommentsRepository {
   create: TCreate
