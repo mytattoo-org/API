@@ -16,13 +16,16 @@ class ReadCommentsService {
     if (!postId && !userId) throw new AppError('postId or userId needed', 400)
 
     if (postId && userId)
-      throw new AppError('Which between postId or userId', 400)
+      return {
+        comments: await this.commentsRepository.findByPostAndUserId({
+          post_id: postId,
+          user_id: userId
+        })
+      }
 
-    if (postId)
-      return { comments: await this.commentsRepository.findByPostId(postId) }
-
-    if (userId)
-      return { comments: await this.commentsRepository.findByUserId(userId) }
+    return postId
+      ? { comments: await this.commentsRepository.findByPostId(postId) }
+      : { comments: await this.commentsRepository.findByUserId(userId) }
   }
 }
 

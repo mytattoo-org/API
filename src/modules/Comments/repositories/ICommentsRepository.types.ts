@@ -7,15 +7,16 @@ type TUpdate = (data: {
   content: ICommentModel['content']
 }) => Promise<ICommentModel>
 
-type TCreate = (data: ICommentModel) => Promise<ICommentModel>
-
-type TFindByUserId = (userId: IUserModel['id']) => Promise<ICommentModel[]>
-
-type TFindById = (id: ICommentModel['id']) => Promise<ICommentModel>
-
-type TFindByPostId = (postId: IPostModel['id']) => Promise<ICommentModel[]>
+type TFindByPostAndUserId = (data: {
+  user_id: ICommentModel['user_id']
+  post_id: ICommentModel['post_id']
+}) => Promise<ICommentModel[]>
 
 type TDelete = (id: ICommentModel['id']) => Promise<void>
+type TCreate = (data: ICommentModel) => Promise<ICommentModel>
+type TFindById = (id: ICommentModel['id']) => Promise<ICommentModel>
+type TFindByUserId = (userId: IUserModel['id']) => Promise<ICommentModel[]>
+type TFindByPostId = (postId: IPostModel['id']) => Promise<ICommentModel[]>
 
 interface ICommentsRepository {
   create: TCreate
@@ -24,6 +25,7 @@ interface ICommentsRepository {
   findById: TFindById
   findByUserId: TFindByUserId
   findByPostId: TFindByPostId
+  findByPostAndUserId: TFindByPostAndUserId
 }
 
 export type { ICommentsRepository }
