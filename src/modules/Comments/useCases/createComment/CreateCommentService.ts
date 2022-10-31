@@ -22,7 +22,7 @@ class CreateCommentService {
   ) {}
 
   execute: TExecute = async dataToCreate => {
-    if (!dataToCreate.user_id && !dataToCreate.post_id)
+    if (!dataToCreate.user_id && !dataToCreate.post_id && !dataToCreate.content)
       throw new AppError('Missing request data', 400)
 
     const postExists = await this.postsRepository.findById(dataToCreate.post_id)

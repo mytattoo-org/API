@@ -3,7 +3,7 @@ import { ICommentsRepository } from './ICommentsRepository.types'
 
 import { query } from '@shared/database'
 
-import { ICommentUserModel } from '@common/types/comments/models/commentUserModel'
+import { ICommentUser } from '@common/types/comments/models/commentModel'
 
 class CommentsRepository implements ICommentsRepository {
   create: ICommentsRepository['create'] = async ({
@@ -32,23 +32,59 @@ class CommentsRepository implements ICommentsRepository {
       ) RETURNING *;
     `
 
-    const createdComment = (await query<CommentModel>(queryData)).rows[0]
+    await query(queryData)
+
+    const createdComment = this.findById(id)
 
     return createdComment
   }
 
   findById: ICommentsRepository['findById'] = async (id: string) => {
-    const queryData = `SELECT * FROM "Comment" WHERE "id"='${id}';`
+    const queryData = `
+      SELECT
+        c.id,
+        c.content,
+        c.post_id,
+        c.user_id,
+        c.updated_at,
+        c.created_at,
+        u.artist,
+        u.avatar,
+        u.username
+      FROM "Comment" c
+      INNER JOIN "User" u
+      ON c.user_id = u.id
+      WHERE c.id = '${id}'
+      ORDER BY c.created_at
+      DESC;
+    `
 
-    const comment = (await query<CommentModel>(queryData)).rows[0]
+    const comment = (await query<ICommentUser>(queryData)).rows[0]
 
     return comment
   }
 
   findByUserId: ICommentsRepository['findByUserId'] = async id => {
-    const queryData = `SELECT * FROM "Comment" WHERE "user_id"='${id}';`
+    const queryData = `
+      SELECT
+        c.id,
+        c.content,
+        c.post_id,
+        c.user_id,
+        c.updated_at,
+        c.created_at,
+        u.artist,
+        u.avatar,
+        u.username
+      FROM "Comment" c
+      INNER JOIN "User" u
+      ON c.user_id = u.id
+      WHERE c.user_id = '${id}'
+      ORDER BY c.created_at
+      DESC;
+    `
 
-    const comments = (await query<CommentModel>(queryData)).rows
+    const comments = (await query<ICommentUser>(queryData)).rows
 
     return comments
   }
@@ -73,7 +109,7 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUserModel>(queryData)).rows
+    const comments = (await query<ICommentUser>(queryData)).rows
 
     return comments
   }
@@ -83,12 +119,26 @@ class CommentsRepository implements ICommentsRepository {
     user_id: userId
   }) => {
     const queryData = `
-      SELECT * FROM "Comment"
-      WHERE "user_id"='${userId}'
-      AND "post_id"='${postId}';
+      SELECT
+        c.id,
+        c.content,
+        c.post_id,
+        c.user_id,
+        c.updated_at,
+        c.created_at,
+        u.artist,
+        u.avatar,
+        u.username
+      FROM "Comment" c
+      INNER JOIN "User" u
+      ON c.user_id = u.id
+      WHERE c.post_id = '${postId}'
+      AND c.user_id = '${userId}'
+      ORDER BY c.created_at
+      DESC;
     `
 
-    const comments = (await query<CommentModel>(queryData)).rows
+    const comments = (await query<ICommentUser>(queryData)).rows
 
     return comments
   }

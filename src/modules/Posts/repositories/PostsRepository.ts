@@ -74,7 +74,7 @@ class PostsRepository implements IPostsRepository {
         '${createdAt}',
         '${updatedAt}',
         '${description}'
-      );
+      ) RETURNING *;
     `
 
     const createdPost = (await query<PostModel>(queryData)).rows[0]
