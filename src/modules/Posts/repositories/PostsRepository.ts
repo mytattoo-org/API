@@ -15,8 +15,7 @@ class PostsRepository implements IPostsRepository {
         p.id,
         p.user_id,
         u.username,
-        u.avatar,
-        u.artist
+        u.avatar
       FROM "Post" p
       INNER JOIN "User" u
       ON p.user_id = u.id

@@ -40,7 +40,6 @@ class ReadFeedService {
         image: bufferToB64(post.image),
         author: {
           id: post.user_id,
-          artist: post.artist,
           username: post.username,
           avatar: bufferToB64(post.avatar)
         }

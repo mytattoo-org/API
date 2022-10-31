@@ -49,7 +49,6 @@ class CreatePostService {
       description: createdPost.description,
       author: {
         id: foundUser.id,
-        artist: foundUser.artist,
         username: foundUser.username,
         avatar: bufferToB64(foundUser.avatar)
       }

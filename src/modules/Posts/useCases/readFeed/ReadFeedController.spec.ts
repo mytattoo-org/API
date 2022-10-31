@@ -54,7 +54,6 @@ describe('ReadFeedController', () => {
       {
         author: {
           id: user.id,
-          artist: user.artist,
           username: user.username
         },
         image: dataToCreate.image,

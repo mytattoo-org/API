@@ -48,7 +48,6 @@ class CommentsRepository implements ICommentsRepository {
         c.user_id,
         c.updated_at,
         c.created_at,
-        u.artist,
         u.avatar,
         u.username
       FROM "Comment" c
@@ -73,7 +72,6 @@ class CommentsRepository implements ICommentsRepository {
         c.user_id,
         c.updated_at,
         c.created_at,
-        u.artist,
         u.avatar,
         u.username
       FROM "Comment" c
@@ -98,7 +96,6 @@ class CommentsRepository implements ICommentsRepository {
         c.user_id,
         c.updated_at,
         c.created_at,
-        u.artist,
         u.avatar,
         u.username
       FROM "Comment" c
@@ -126,7 +123,6 @@ class CommentsRepository implements ICommentsRepository {
         c.user_id,
         c.updated_at,
         c.created_at,
-        u.artist,
         u.avatar,
         u.username
       FROM "Comment" c
