@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe'
 
 import { TExecute } from './CreateComment.types'
 
+import { formatComment } from '@modules/Comments/formatter'
 import { CommentModel } from '@modules/Comments/models/CommentModel'
 import { ICommentsRepository } from '@modules/Comments/repositories/ICommentsRepository.types'
 import { AppError } from '@modules/Error/models/AppError'
@@ -37,7 +38,9 @@ class CreateCommentService {
 
     Object.assign(newComment, { ...dataToCreate })
 
-    const createdComment = await this.commentsRepository.create(newComment)
+    const createdComment = formatComment(
+      await this.commentsRepository.create(newComment)
+    )
 
     return { createdComment }
   }

@@ -2,7 +2,8 @@
   "include": [
     "./src/**/*",
     "./src/docs/swagger.yml",
-    "./submodules/common/**/*"
+    "./submodules/common/**/*",
+    "../common/src"
   ],
   "references": [{ "path": "../common" }],
   "compilerOptions": {

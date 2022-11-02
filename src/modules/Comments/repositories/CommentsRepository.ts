@@ -3,7 +3,7 @@ import { ICommentsRepository } from './ICommentsRepository.types'
 
 import { query } from '@shared/database'
 
-import { ICommentUser } from '@common/types/comments/models/commentModel'
+import { ICommentUserModel } from '@common/types/comments/models/commentUserModel'
 
 class CommentsRepository implements ICommentsRepository {
   create: ICommentsRepository['create'] = async ({
@@ -58,7 +58,7 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comment = (await query<ICommentUser>(queryData)).rows[0]
+    const comment = (await query<ICommentUserModel>(queryData)).rows[0]
 
     return comment
   }
@@ -82,7 +82,7 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUser>(queryData)).rows
+    const comments = (await query<ICommentUserModel>(queryData)).rows
 
     return comments
   }
@@ -106,7 +106,7 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUser>(queryData)).rows
+    const comments = (await query<ICommentUserModel>(queryData)).rows
 
     return comments
   }
@@ -134,7 +134,7 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUser>(queryData)).rows
+    const comments = (await query<ICommentUserModel>(queryData)).rows
 
     return comments
   }

@@ -4,7 +4,7 @@ import { app } from '@shared/routes'
 import type { ISuperResponse } from '@shared/types/supertest'
 
 import type { TSignInResponse } from '@common/types/authentication/useCases/signIn.types'
-import type { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
+import { TCreateUserResponse } from '@common/types/users/useCases/createUser.types'
 
 const createUserData = {
   username: 'InSTinToS',

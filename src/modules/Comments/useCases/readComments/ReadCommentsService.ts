@@ -2,6 +2,7 @@ import { inject, injectable } from 'tsyringe'
 
 import { TExecute } from './readComments.types'
 
+import { formatComments } from '@modules/Comments/formatter'
 import { ICommentsRepository } from '@modules/Comments/repositories/ICommentsRepository.types'
 import { AppError } from '@modules/Error/models/AppError'
 
@@ -17,19 +18,26 @@ class ReadCommentsService {
 
     if (postId && userId)
       return {
-        comments: await this.commentsRepository.findByPostAndUserId({
-          post_id: postId,
-          user_id: userId
-        })
+        comments: formatComments(
+          await this.commentsRepository.findByPostAndUserId({
+            post_id: postId,
+            user_id: userId
+          })
+        )
       }
 
-    if (postId) {
-      const comments = await this.commentsRepository.findByPostId(postId)
+    if (postId)
+      return {
+        comments: formatComments(
+          await this.commentsRepository.findByPostId(postId)
+        )
+      }
 
-      return { comments }
+    return {
+      comments: formatComments(
+        await this.commentsRepository.findByUserId(userId)
+      )
     }
-
-    return { comments: await this.commentsRepository.findByUserId(userId) }
   }
 }
 
