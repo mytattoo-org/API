@@ -36,4 +36,4 @@ services:
       - database
     volumes:
       - .:/app/api
-    command: sh -c "${DOCKER_AFTER_UP}"
+    command: sh -c "yarn docker:build"
