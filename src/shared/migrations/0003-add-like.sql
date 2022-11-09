@@ -10,3 +10,4 @@ CREATE TABLE IF NOT EXISTS "Like" (
 
   PRIMARY KEY ("user_id", "post_id")
 )
+

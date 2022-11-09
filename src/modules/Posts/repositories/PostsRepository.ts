@@ -80,6 +80,26 @@ class PostsRepository implements IPostsRepository {
 
     return createdPost
   }
+
+  update: IPostsRepository['update'] = async data => {
+    const updatedDate = new Date().toISOString()
+
+    const queryData = `
+        UPDATE
+          "Post"
+        SET
+          "image" = '${data.image}',
+          "description" = '${data.description}',
+          "updated_at" = '${updatedDate}'
+        WHERE
+          "id" = '${data.id}'
+        RETURNING *;
+      `
+
+    const updatedPost = (await query<PostModel>(queryData)).rows[0]
+
+    return updatedPost
+  }
 }
 
 export { PostsRepository }

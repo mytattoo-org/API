@@ -6,13 +6,12 @@ import {
 } from '@common/types/comments/models/commentUserModel'
 
 export const formatComment = ({
-  avatar,
   user_id,
   username,
   ...comment
 }: ICommentUserModel): ICommentUser => ({
   ...comment,
-  author: { avatar: bufferToB64(avatar), username, id: user_id }
+  author: { avatar: bufferToB64(comment.avatar), username, id: user_id }
 })
 
 export const formatComments = (comments: ICommentUserModel[]): ICommentUser[] =>

@@ -3,6 +3,7 @@ import { ICommentsRepository } from './ICommentsRepository.types'
 
 import { query } from '@shared/database'
 
+import { ICommentModel } from '@common/types/comments/models/commentModel'
 import { ICommentUserModel } from '@common/types/comments/models/commentUserModel'
 
 class CommentsRepository implements ICommentsRepository {
@@ -29,12 +30,12 @@ class CommentsRepository implements ICommentsRepository {
         '${content}',
         '${updated_at}',
         '${created_at}'
-      ) RETURNING *;
+      );
     `
 
-    await query(queryData)
+    await query<ICommentModel>(queryData)
 
-    const createdComment = this.findById(id)
+    const createdComment = await this.findById(id)
 
     return createdComment
   }
@@ -58,9 +59,9 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comment = (await query<ICommentUserModel>(queryData)).rows[0]
+    const foundComment = (await query<ICommentUserModel>(queryData)).rows[0]
 
-    return comment
+    return foundComment
   }
 
   findByUserId: ICommentsRepository['findByUserId'] = async id => {
@@ -82,9 +83,9 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUserModel>(queryData)).rows
+    const foundComments = (await query<ICommentUserModel>(queryData)).rows
 
-    return comments
+    return foundComments
   }
 
   findByPostId: ICommentsRepository['findByPostId'] = async id => {
@@ -106,9 +107,9 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUserModel>(queryData)).rows
+    const foundComments = (await query<ICommentUserModel>(queryData)).rows
 
-    return comments
+    return foundComments
   }
 
   findByPostAndUserId: ICommentsRepository['findByPostAndUserId'] = async ({
@@ -134,25 +135,26 @@ class CommentsRepository implements ICommentsRepository {
       DESC;
     `
 
-    const comments = (await query<ICommentUserModel>(queryData)).rows
+    const foundComments = (await query<ICommentUserModel>(queryData)).rows
 
-    return comments
+    return foundComments
   }
 
   update: ICommentsRepository['update'] = async data => {
     const updatedDate = new Date().toISOString()
 
-    await query<CommentModel>(`
+    const queryData = `
         UPDATE
           "Comment"
         SET
           "content" = '${data.content}',
           "updated_at" = '${updatedDate}'
         WHERE
-          "id" = '${data.id}';
-      `)
+          "id" = '${data.id}'
+        RETURNING *;
+      `
 
-    const updatedComment = await this.findById(data.id)
+    const updatedComment = (await query<CommentModel>(queryData)).rows[0]
 
     return updatedComment
   }
